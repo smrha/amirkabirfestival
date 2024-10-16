@@ -1,15 +1,7 @@
-{% load static %}
-<!doctype html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="{% static "css/main.css" %}" rel="stylesheet">
-  <script src="./node_modules/preline/dist/preline.js"></script>
-</head>
-<body>
-  <h1 class="text-3xl font-bold underline">
-    Hello world!
-  </h1>
-</body>
-</html>
+<!-- templates/index.html -->
+
+{% extends "_base.html" %}
+
+{% block content %}
+  <h1 class="text-3xl text-green-800">Django + Tailwind CSS + Flowbite</h1>
+{% endblock content %}
