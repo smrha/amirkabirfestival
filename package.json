@@ -1,4 +1,7 @@
 {
+  "scripts": {
+    "dev": "tailwindcss -i static/tw/tailwind-input.css -o static/css/amirkabir-ui.css --watch"
+  },
   "devDependencies": {
     "tailwindcss": "^3.4.14"
   },
