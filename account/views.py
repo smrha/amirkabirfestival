@@ -4,7 +4,6 @@ from django.contrib.auth import authenticate, login, logout
 from .forms import LoginForm, ProfileForm
 
 def main(request):
-    print("This")
     return render(request, 'blog/main.html')
 
 def user_profile(request):

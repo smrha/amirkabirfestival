@@ -1,20 +1,33 @@
-{% extends "blog/_base.html" %}
 {% load static %}
 
-{% block content %}
+<!DOCTYPE html>
+<html dir="rtl" lang="en">
 
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>جشنواره ملی امیرکبیر</title>
 
-<div id="default-carousel" class="relative top-20 w-full" data-carousel="slide">
-    
-    <!-- Carousel wrapper -->
-    <div class="h-96 overflow-hidden rounded-lg">
-         <!-- Item 1 -->
-        <div class="duration-700 ease-in-out" >
-            <img src="{% static 'img/banner.jpg' %}" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
-        </div>
-    </div>
+    <link rel="stylesheet" href="{% static 'css/amirkabir-ui.css' %}">
 
+</head>
 
+<body class="bg-green-50">
+    {% include 'blog/_navbar.html' %}
 
+    {% include 'blog/_carousel.html' %}
 
-{% endblock content %}>
+    {% include 'blog/_customer.html' %}
+
+    {% include 'blog/_news.html' %}
+
+    {% include 'blog/_gallery.html' %}
+
+    {% include 'blog/_footer.html' %}
+  
+
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
+</body>
+
+</html>
