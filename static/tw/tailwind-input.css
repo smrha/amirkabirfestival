@@ -1,3 +1,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+    @font-face {
+      font-family: 'DanaRegular';
+      /* font-style: normal; */
+      /* font-weight: 400; */
+      /* font-display: swap; */
+      src: url(../font/Dana-Regular.woff) format('woff');
+    }
+    html, body, span {
+        font-family: "DanaRegular";
+      }
+  }

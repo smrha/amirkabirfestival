@@ -2,13 +2,13 @@ from django.urls import path
 from django.contrib.auth import views as auth_views
 from . import views
 
+app_name = 'account'
+
 urlpatterns = [
-    path('login/', 
-         auth_views.LoginView.as_view(), 
-         name='login'),
-    path('logout/', 
-         auth_views.LogoutView.as_view(), 
-         name='logout'),
+    path('profile/', views.user_profile, name='user_profile'),
+
+    path('login/', views.user_login, name='login'),
+    path('logout/', views.user_logout, name='logout'),
 
     # change password urls
     path('password-change/', 
@@ -32,5 +32,5 @@ urlpatterns = [
          auth_views.PasswordResetCompleteView.as_view(),
          name='password_reset_complete'),
      
-     path('', views.home, name='home')
+     path('home', views.home, name='home')
 ]

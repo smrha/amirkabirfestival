@@ -1,7 +1,25 @@
 from django.http import HttpResponse
-from django.shortcuts import render
-from django.contrib.auth import authenticate, login
-from .forms import LoginForm
+from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login, logout
+from .forms import LoginForm, ProfileForm
+
+def main(request):
+    print("This")
+    return render(request, 'blog/main.html')
+
+def user_profile(request):
+    form = ProfileForm()
+    context = {
+        'form': form
+    }
+    return render(request, 'account/profile/user_profile.html', context)
+
+def home(request):
+    return render(request, 'home.html')
+
+def user_logout(request):
+    logout(request)
+    return redirect('account:logout')
 
 def user_login(request):
     if request.method == 'POST':
@@ -14,7 +32,7 @@ def user_login(request):
         if user is not None:
             if user.is_active:
                 login(request, user)
-                return HttpResponse('Authenticated successfully')
+                return redirect("account:home")
             else:
                 return HttpResponse('Disabled account')
         else:
@@ -23,5 +41,3 @@ def user_login(request):
         form = LoginForm()
     return render(request, 'account/login.html', {'form': form})
 
-def home(request):
-    return render(request, 'home.html')
