@@ -25,7 +25,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'article',
+    'blog',
     'account'
 ]
 
@@ -116,5 +116,9 @@ STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
 
-# LOGIN_URL = 'login'
-# LOGOUT_URL = 'logout'
+LOGIN_URL = 'login'
+LOGOUT_URL = 'logout'
+LOGIN_REDIRECT_URL = '/account/home'
+
+MEDIA_URL = 'media/'
+MEDIA_ROOT = BASE_DIR / 'media'

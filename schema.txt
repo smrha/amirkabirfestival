@@ -8,9 +8,35 @@ date_of_birth   محل تولد
 
 education profile
 
-دانشگاه محل تحصیل
+univercity
+field_study
+degree
+score
+انشگاه محل تحصیل
 رشته تحصیلی
 مقطع تحصیلی
+
+
+
+title
+education_group
+teacher
+teacher_mobile
+teacher_email
+adviser
+adviser_mobile
+adviser_email
+defense_date
+article_score
+type
+Requester
+Requester_loc
+confirmation
+summary
+file
+other
+
+
 گروه آموزشی
 عنوان پایان نامه
 ارستاد راهنما

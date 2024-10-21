@@ -1,7 +1,10 @@
+<!-- templates/_base.html -->
+
+{% comment %} {% load compress %} {% endcomment %}
 {% load static %}
 
 <!DOCTYPE html>
-<html dir="rtl" lang="en">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -9,12 +12,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>امیر کبیر</title>
 
-    <link rel="stylesheet" href="{% static 'css/amirkabir-ui.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/flowbite.min.css' %}">
 
 </head>
 
     <body class="bg-green-100">
-        {% comment %} {% include "account/base/_navbar.html" %} {% endcomment %}
         {% block content %}
         {% endblock content %}
     </div>

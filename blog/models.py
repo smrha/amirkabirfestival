@@ -3,6 +3,13 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 from django.urls import reverse
 
+
+class PublishedManager(models.Manager):
+    def get_queryset(self):
+        return super().get_queryset()\
+                      .filter(status=Post.Status.PUBLISHED)
+
+
 class Post(models.Model):
 
     class Status(models.TextChoices):
@@ -25,6 +32,9 @@ class Post(models.Model):
                               default=Status.DRAFT)
     photo = models.ImageField(upload_to='users/%Y/%m/%d/',
                               blank=True)
+
+    objects = models.Manager() # The default manager.
+    published = PublishedManager() # Our custom manager.
 
     class Meta:
         ordering = ['-publish']
