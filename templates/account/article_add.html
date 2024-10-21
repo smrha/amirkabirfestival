@@ -33,8 +33,53 @@
       <div class="max-w-2xl px-4 py-8 mx-auto lg:py-16">
           <h2 class="mb-4 text-xl font-bold text-gray-900 dark:text-white">ویرایش حساب کاربری</h2>
           <form method="POST">
-            {{ form.as_p }}
-            {% csrf_token %}
+            <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
+              <div class="sm:col-span-2">
+                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ form.title.label }}</label>
+                {{ form.title }}
+              </div>
+              <div class="sm:col-span-2">
+                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ form.summary.label }}</label>
+                {{ form.summary }}
+              </div>
+              <div class="sm:col-span-2">
+                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ form.education_group.label }}</label>
+                {{ form.education_group }}
+              </div>
+              <div class="sm:col-span-2">
+                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ form.teacher.label }}</label>
+                {{ form.teacher }}
+              </div>
+              <div class="w-full">
+                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ form.teacher_mobile.label }}</label>
+                {{ form.teacher_mobile }}
+              </div>
+              <div class="w-full">
+                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ form.teacher_email.label }}</label>
+                {{ form.teacher_email }}
+              </div>
+              <div class="sm:col-span-2">
+                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ form.adviser.label }}</label>
+                {{ form.adviser }}
+              </div>
+              <div class="w-full">
+                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ form.adviser_mobile.label }}</label>
+                {{ form.adviser_mobile }}
+              </div>
+              <div class="w-full">
+                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ form.adviser_email.label }}</label>
+                {{ form.adviser_email }}
+              </div>
+              <div class="sm:col-span-2">
+                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ form.requester.label }}</label>
+                {{ form.requester }}
+              </div>
+              <div class="sm:col-span-2">
+                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ form.requester_loc.label }}</label>
+                {{ form.requester_loc }}
+              </div>
+
+            </div>
               <div class="flex items-center space-x-4">
                   <button type="submit" class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
                       ارسال

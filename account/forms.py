@@ -3,6 +3,9 @@ from django.contrib.auth.models import User
 from django import forms
 from .models import Profile, Education, Article
 
+class DateInput(forms.DateInput):
+    input_type = 'date'
+
 
 class ArticleForm(forms.ModelForm):
     title = forms.CharField(
@@ -57,8 +60,8 @@ class ArticleForm(forms.ModelForm):
         )
     summary = forms.CharField(
         label="خلاصه",
-        widget=forms.TextInput(
-            attrs={"class": "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"})
+        widget=forms.Textarea(
+            attrs={"class": "block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"})
         )
     Requester = forms.CharField(
         label="تقاضا دهنده",
@@ -129,7 +132,7 @@ class UserEditForm(forms.ModelForm):
 
 class ProfileEditForm(forms.ModelForm):
     father_name = forms.CharField(
-        label="نام",
+        label="نام پدر",
         widget=forms.TextInput(
             attrs={"class": "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"})
         )
@@ -145,7 +148,7 @@ class ProfileEditForm(forms.ModelForm):
     )
     date_of_birth = forms.DateField(
         label="تاریخ تولد",
-        widget=forms.TextInput(
+        widget=DateInput(
             attrs={"class": "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"})
     )
     city_of_birth = forms.CharField(

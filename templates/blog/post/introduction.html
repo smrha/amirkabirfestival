@@ -1,0 +1,131 @@
+{% extends "../base.html" %}
+{% load static %}
+
+
+{% block title %}{{ post.title }}{% endblock %}
+
+{% block content %}
+
+<section class="bg-white pt-8 antialiased dark:bg-gray-900 md:py-8">
+    <div class="mx-auto max-w-screen-lg px-4 2xl:px-0">
+      <nav class="mb-4 flex" aria-label="Breadcrumb">
+        <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
+          <li class="inline-flex items-center">
+            <a href="#" class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-primary-600 dark:text-gray-400 dark:hover:text-white">
+              <svg class="me-2 h-4 w-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m4 12 8-8 8 8M6 10.5V19a1 1 0 0 0 1 1h3v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3h3a1 1 0 0 0 1-1v-8.5" />
+              </svg>
+              خانه
+            </a>
+          </li>
+          <li>
+            <div class="flex items-center">
+              <svg class="mx-1 h-4 w-4 text-gray-400 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m9 5 7 7-7 7" />
+              </svg>
+              <a href="#" class="ms-1 text-sm font-medium text-gray-700 hover:text-primary-600 dark:text-gray-400 dark:hover:text-white md:ms-2">معرفی جشنواره</a>
+            </div>
+          </li>
+        </ol>
+      </nav>
+      
+    </div>
+
+    <!-- Account Information Modal -->
+    <section class="bg-white dark:bg-gray-900">
+      <div class="max-w-2xl px-4 mx-auto lg:py-2">
+          <!-- Blog Article -->
+            <div class="max-w-3xl px-4 pt-6 lg:pt-10 pb-12 sm:px-6 lg:px-8 mx-auto">
+                <div class="max-w-2xl">
+                    <h2 class="text-2xl font-bold md:text-3xl dark:text-white">معرفی جشنواره پایان نامه های کاربردی و کارفرمایی</h2>
+                    {% comment %} <figure>
+                        <img class="mt-8 w-full object-cover rounded-xl" src="{% static "img/executive-pic.png" %}" alt="Blog Image">
+                    </figure> {% endcomment %}
+                    
+                    <!-- Avatar Media -->
+                    <div class="mt-6 flex justify-between items-center mb-6">
+                        <div class="flex w-full sm:items-center gap-x-5 sm:gap-x-3">
+                            
+                            <div class="shrink-0">
+                            <img class="size-12 rounded-full" src="{% static "img/user.png" %}" alt="Avatar">
+                            </div>
+
+                            <div class="grow">
+                            <div class="flex justify-between items-center gap-x-2">
+                                <div>
+                                <!-- Tooltip -->
+                                <div class="hs-tooltip [--trigger:hover] [--placement:bottom] inline-block">
+                                    <div class="hs-tooltip-toggle sm:mb-1 block text-start cursor-pointer">
+                                    <span class="font-semibold text-gray-800 dark:text-neutral-200">
+                                        سردبیر
+                                    </span>
+
+                                
+                                    </div>
+                                </div>
+                                <!-- End Tooltip -->
+
+                                <ul class="text-xs text-gray-500 dark:text-neutral-500">
+                                    <li class="inline-block relative pe-6 last:pe-0 last-of-type:before:hidden before:absolute before:top-1/2 before:end-2 before:-translate-y-1/2 before:size-1 before:bg-gray-300 before:rounded-full dark:text-neutral-400 dark:before:bg-neutral-600">
+                                    1 مهر
+                                    </li>
+                                    <li class="inline-block relative pe-6 last:pe-0 last-of-type:before:hidden before:absolute before:top-1/2 before:end-2 before:-translate-y-1/2 before:size-1 before:bg-gray-300 before:rounded-full dark:text-neutral-400 dark:before:bg-neutral-600">
+                                    12 دقیقه
+                                    </li>
+                                </ul>
+                                </div>
+
+                                <!-- Button Group -->
+                                <div>
+                                <button type="button" class="py-1.5 px-2.5 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 focus:outline-none focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-700 dark:focus:bg-neutral-700">
+                                    <svg class="size-3.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z"/>
+                                    </svg>
+                                    اشتراک
+                                </button>
+                                </div>
+                                <!-- End Button Group -->
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Avatar Media -->
+
+                    <!-- Content -->
+                    <div class="space-y-5 md:space-y-8">
+                    <div class="space-y-3">
+                        
+                        <p class="text-lg text-gray-800 dark:text-neutral-200">مطالعات تعامل صنعت و دانشگاه و جلسات هم اندیشی اتاق فکر ارتباط صنعت و دانشگاه، جهاد دانشگاهی استان البرز و اتاق بازرگانی، صنایع، معادن و کشاورزی استان البرز که بر اساس روش ارزیابی مشارکتی (PA) انجام شده است، نشان داده است شکاف عمیق اهداف و برنامه‌ها و فقدان گفتمان مشترک بین دانشگاه و صنعت موجب شده است که از ظرفیت‌های یکدیگر بی‌بهره بمانند درحالی‌که هر دو طرف اعتقاد دارند، هم صنعت و هم دانشگاه از ارتباط با یکدیگر منتفع می‌گردند و از طرفی هم هریک به‌تنهایی از انگیزه‌هایی برای ایجاد ارتباط با یکدیگر برخوردار هستند ولی به علت نبود بستری مناسب و فراگیر و ساختار نهادی، از قابلیت‌ها و توانمندی‌های همدیگر بی بهره مانده‌اند. هرچند در طول دهه اخیر اتخاذ سیاست‌های راهبردی در سطح کلان و اجرای برنامه‌های مختلف، از طرف نهادهای علمی یا صنعتی و صرف هزینه¬های بسیار هنگفتی در افزایش سرمایه علمی کشور در دانشگاه و مراکز تحقیقاتی صورت می‌گیرد که متأسفانه تولیدات آن با کمترین سطح کاربرد در توسعه صنایع و جامعه در کتابخانه‌های دانشگاه‌ها و مراکز علمی نگهداری می‌شود و از طرف دیگر صنایع کشور بعد از سالها فعالیت به دلیل پایین بودن دانش کاربردی توان رقابت در بازارهای بین‌المللی را نداشته و معمولاً با الگوگیری از صنایع مشابه خارجی نیاز به دانش خود را به‌صورت دست‌ دوم و یا مهندسی مجدد و یا خرید فن‌آوری از خارج از کشور تأمین می‌کنند که منجر به کاهش توان رقابتی این بخش می‌گردد. با توجه به این بی اطلاعاتی از یکدیگر و نداشتن تعامل مؤثر، هرگز بازار عرضه و تقاضای دانش و فن‌آوری در اقتصاد داخلی کشور شکل نگرفت و این شکاف همچنان عمیق باقی‌مانده است. بر اساس اصول علم اقتصاد، زمانی اتلاف منابع در یک بازار به حداقل ممکن خواهد رسید که بین عرضه و تقاضا هیچ شکافی وجود نداشته باشد و از طرفی بدیهی است وجود اطلاعات و مبادله‌ی اطلاعات بین عرضه و تقاضا در بازار هر محصول یا خدمات، یکی از شرایط اصلی رسیدن به تعادل در بازار است درواقع برای کاهش شکاف بین بخش صنعت و دانشگاه ضروری است که بازارهای علم و دانش و تعاملات و معاملات و مبادلات شکل‌گرفته شود تا مکانیزم بازار در تخصیص بهینه این محصول به‌صورت صحیح عمل نماید. با در نظر گرفتن مطالعات صورت گرفته در حوزه ارتباط دانشگاه و صنعت و همچنین با بررسی مسائل اساسی در بروز شکاف موجود بین این دو حوزه، راه¬کارهای اجرایی کاربردی کردن دانش تولیدی در مراکز علمی کشور (عرضه) بکار بردن دانش و فن‌آوری بر اساس نیازهای تغییر و توسعه (تقاضا)، تنها راه، کاهش شکاف بین صنعت و دانشگاه ایجاد کانال ارتباط خواهد بود. در هر صورت بخش اعظم تحقیقات و پایان نامه ها به نقل از مسئولین وزارت علوم، تحقیقات و فناوری”رساله‌هایی که تقاضا محور بوده و همراه پروژه‌ای از بیرون دانشگاه باشند بسیار پایین است. شاید زیر یک درصد یا یک درصد.” این یعنی اتلاف منابع و سرمایه عظیم مادی و انسانی. بر اساس یافته های این تحقیق مشخص شد به دلیل عدم فعالیت نهادهای پایدار و کارآمد، ارتباط سیستمی و نظام یافته بین پایان نامه¬ها و تقاضا برای این طرح¬ها شکل نگرفته است. </p>
+                        <p class="text-lg text-gray-800 dark:text-neutral-200">ر اساس نتایج مطالعات، لازم است نهادسازی انجام پذیرفته و میدان حضور و ظهور پایان نامه¬ها و طرح ها، برای کاربردی شدن در صنعت و جامعه طراحی و ایجاد گردد و باید طرحی نو درانداخت و تقاضاهای جامعه و صنعت را به دانشگاه شناساند. لذا طرح جشنواره ملی طرح ها و پایان نامه¬های کاربردی و کارفرمایی با هدف پلی ارتباطی، که این شکاف را به هم متصل کند، طراحی شده است و در همین راستا در طول سه سال در اتاق فکر ارتباط صنعت و دانشگاه و با حضور نماینده های هر دو طرف، در چندین جلسه هم اندیشی مورد بحث قرار گرفته است. بر اساس نتایج این مطالعه، این جشنواره می تواند نقش یک نهاد و ساختار را به عهده داشته باشد. جهاد دانشگاهی استان البرز و اتاق بازرگانی، صنایع، معادن و کشاورزی استان البرز با همکاری همه‌ی ذی¬نفعان (صنعت-دانشگاه-مراکز تحقیقاتی –جامعه و دولت) راهبرد کاربردی کردن و کارفرمایی کردن طرح‌های تحقیقاتی و پایان‌نامه‌های دانشجویی و پروژه‌های پژوهشی را با اولویت نیاز محور بودن در جهت بهبود محیط کسب‌وکار با ایجاد یک جشنواره ملی فراگیر در دستور کار قرار داد                        </p>
+                        <p class="text-lg text-gray-800 dark:text-neutral-200">کلید واژه: دانشگاه، صنعت،پایان نامه کاربردی، پایان­نامه کارفرمایی.</p>
+                        <p class="text-lg text-gray-800 dark:text-neutral-200">کاربردی: منظور آن است که هر طرح و پایان نامه می بایست در خارج از محل تهیه، کاربرد روشن برای مؤسسه حقیقی وحقوقی داشته و دقیقا در طول کار علمی و پژوهشی در تعامل و ارتباط مستقیم باشد. خود محقق و دانشجو تقاضا همکاری را، راسماً به مؤسسه و بنگاه ارائه نماید و تقاضا ی همکاری نماید یا تقاضای بازار را شناسایی، توانمندی خود عرضه نماید درهر صورت کاربرد آن مشخص می شود                        </p>
+                        <p class="text-lg text-gray-800 dark:text-neutral-200">کارفرمایی: منظور از کارفرمایی این است بسیاری از مؤسسات و بنگاه¬ها و دستگاه¬ها، نیازها و ضرورت های خود را به صورت رسمی و غیر رسمی اعلام می نماید و حاضرند در قبال یک کار علمی و پژوهشی هزینه های لازم را پرداخت نمایند.                        </p>
+
+                    </div>
+
+
+                    <div>
+                        <a class="m-1 inline-flex items-center gap-1.5 py-2 px-3 rounded-full text-sm bg-gray-100 text-gray-800 hover:bg-gray-200 focus:outline-none focus:bg-gray-200 dark:bg-neutral-800 dark:text-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700" href="#">
+                        جشنواره
+                        </a>
+                        <a class="m-1 inline-flex items-center gap-1.5 py-2 px-3 rounded-full text-sm bg-gray-100 text-gray-800 hover:bg-gray-200 focus:outline-none focus:bg-gray-200 dark:bg-neutral-800 dark:text-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700" href="#">
+                        امیرکبیر
+                        </a>
+                        <a class="m-1 inline-flex items-center gap-1.5 py-2 px-3 rounded-full text-sm bg-gray-100 text-gray-800 hover:bg-gray-200 focus:outline-none focus:bg-gray-200 dark:bg-neutral-800 dark:text-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700" href="#">
+                        پایان نامه
+                        </a>
+                        <a class="m-1 inline-flex items-center gap-1.5 py-2 px-3 rounded-full text-sm bg-gray-100 text-gray-800 hover:bg-gray-200 focus:outline-none focus:bg-gray-200 dark:bg-neutral-800 dark:text-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700" href="#">
+                        رساله
+                        </a>
+                    </div>
+                    </div>
+                    <!-- End Content -->
+                </div>
+            </div>
+        <!-- End Blog Article -->
+
+
+      </div>
+    </section>
+
+{% endblock %}

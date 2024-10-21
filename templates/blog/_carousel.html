@@ -1,8 +1,22 @@
 {% load static %}
+    <!-- Swiper -->
+    <div class="swiper mySwiper">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide"><img src={% static "img/banner2.jpg" %}></img></div>
+          {% for post in posts %}
+            <div class="swiper-slide"><a href="{{ post.get_absolute_url}}"><img src={{ post.photo.url }}></img></a></div>
+          {% endfor %}
+        </div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-pagination"></div>
+      </div>
+    
+      <!-- Swiper JS -->
 
-<div id="default-carousel" class="relative w-full" data-carousel="slide">
+{% comment %} <div id="default-carousel" class="relative w-full" data-carousel="slide">
     <!-- Carousel wrapper -->
-    <div class="relative lg:h-96 overflow-hidden rounded-lg md:h-96">
+    <div class="relative -z-50 lg:h-96 overflow-hidden rounded-lg md:h-96">
          <!-- Item 1 -->
         <div class="hidden duration-700 ease-in-out" data-carousel-item>
             <img src="{% static 'img/banner.jpg' %}" class="absolute block w-full h-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
@@ -34,4 +48,4 @@
             <span class="sr-only">بعدی</span>
         </span>
     </button>
-</div>
+</div> {% endcomment %}

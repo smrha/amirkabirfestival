@@ -5,13 +5,15 @@ from django.contrib.auth import authenticate, login, logout
 from .forms import LoginForm, UserEditForm, ProfileEditForm, CustomAuthenticationForm, \
     CustomUserCreationForm, EducationEditForm, ArticleForm
 from .models import Profile, Education
+from blog.models import Post
 
 
 class CustomLoginView(LoginView):
     authentication_form = CustomAuthenticationForm
 
 def main(request):
-    return render(request, 'blog/main.html')
+    posts = Post.published.all()
+    return render(request, 'blog/main.html', {'posts': posts})
 
 def article_add(request):
     if request.method == 'POST':

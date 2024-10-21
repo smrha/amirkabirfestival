@@ -13,7 +13,7 @@ SECRET_KEY = 'django-insecure-l57ww##$t2jb*u&=lxd#h0ntt7yq$3ayeuodg481kdb77ev@mh
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', 'amirkabirfestival.ir', 'www.amirkabirfestival.ir']
 
 
 # Application definition

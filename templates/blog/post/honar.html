@@ -1,0 +1,132 @@
+{% extends "../base.html" %}
+{% load static %}
+
+
+{% block title %}{{ post.title }}{% endblock %}
+
+{% block content %}
+
+<section class="bg-white pt-8 antialiased dark:bg-gray-900 md:py-8">
+    <div class="mx-auto max-w-screen-lg px-4 2xl:px-0">
+      <nav class="mb-4 flex" aria-label="Breadcrumb">
+        <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
+          <li class="inline-flex items-center">
+            <a href="#" class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-primary-600 dark:text-gray-400 dark:hover:text-white">
+              <svg class="me-2 h-4 w-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m4 12 8-8 8 8M6 10.5V19a1 1 0 0 0 1 1h3v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3h3a1 1 0 0 0 1-1v-8.5" />
+              </svg>
+              خانه
+            </a>
+          </li>
+          <li>
+            <div class="flex items-center">
+              <svg class="mx-1 h-4 w-4 text-gray-400 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m9 5 7 7-7 7" />
+              </svg>
+              <a href="#" class="ms-1 text-sm font-medium text-gray-700 hover:text-primary-600 dark:text-gray-400 dark:hover:text-white md:ms-2">هنر و معماری</a>
+            </div>
+          </li>
+        </ol>
+      </nav>
+      
+    </div>
+
+    <!-- Account Information Modal -->
+    <section class="bg-white dark:bg-gray-900">
+      <div class="max-w-2xl px-4 mx-auto lg:py-2">
+          <!-- Blog Article -->
+            <div class="max-w-3xl px-4 pt-6 lg:pt-10 pb-12 sm:px-6 lg:px-8 mx-auto">
+                <div class="max-w-2xl">
+                    <h2 class="text-2xl font-bold md:text-3xl dark:text-white">هنر و معماری</h2>
+                    {% comment %} <figure>
+                        <img class="mt-8 w-full object-cover rounded-xl" src="{% static "img/executive-pic.png" %}" alt="Blog Image">
+                    </figure> {% endcomment %}
+                    
+                    <!-- Avatar Media -->
+                    <div class="mt-6 flex justify-between items-center mb-6">
+                        <div class="flex w-full sm:items-center gap-x-5 sm:gap-x-3">
+                            
+                            <div class="shrink-0">
+                            <img class="size-12 rounded-full" src="{% static "img/user.png" %}" alt="Avatar">
+                            </div>
+
+                            <div class="grow">
+                            <div class="flex justify-between items-center gap-x-2">
+                                <div>
+                                <!-- Tooltip -->
+                                <div class="hs-tooltip [--trigger:hover] [--placement:bottom] inline-block">
+                                    <div class="hs-tooltip-toggle sm:mb-1 block text-start cursor-pointer">
+                                    <span class="font-semibold text-gray-800 dark:text-neutral-200">
+                                        سردبیر
+                                    </span>
+
+                                
+                                    </div>
+                                </div>
+                                <!-- End Tooltip -->
+
+                                <ul class="text-xs text-gray-500 dark:text-neutral-500">
+                                    <li class="inline-block relative pe-6 last:pe-0 last-of-type:before:hidden before:absolute before:top-1/2 before:end-2 before:-translate-y-1/2 before:size-1 before:bg-gray-300 before:rounded-full dark:text-neutral-400 dark:before:bg-neutral-600">
+                                    1 مهر
+                                    </li>
+                                    <li class="inline-block relative pe-6 last:pe-0 last-of-type:before:hidden before:absolute before:top-1/2 before:end-2 before:-translate-y-1/2 before:size-1 before:bg-gray-300 before:rounded-full dark:text-neutral-400 dark:before:bg-neutral-600">
+                                    3 دقیقه
+                                    </li>
+                                </ul>
+                                </div>
+
+                                <!-- Button Group -->
+                                <div>
+                                <button type="button" class="py-1.5 px-2.5 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 focus:outline-none focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-700 dark:focus:bg-neutral-700">
+                                    <svg class="size-3.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z"/>
+                                    </svg>
+                                    اشتراک
+                                </button>
+                                </div>
+                                <!-- End Button Group -->
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Avatar Media -->
+
+                    <!-- Content -->
+                    <div class="space-y-5 md:space-y-8">
+                    <div class="space-y-3">
+                        
+
+                        <blockquote class="text-center p-4 sm:px-7">
+                            <p class="text-xl font-medium text-gray-800 md:text-2xl md:leading-normal xl:text-2xl xl:leading-normal dark:text-neutral-200">
+                            {{ post.lead }}
+                            </p>
+                        </blockquote>
+                        <p class="text-lg text-gray-800 dark:text-neutral-200">{{ post.body }}</p>
+                    </div>
+
+
+                    <div>
+                        <a class="m-1 inline-flex items-center gap-1.5 py-2 px-3 rounded-full text-sm bg-gray-100 text-gray-800 hover:bg-gray-200 focus:outline-none focus:bg-gray-200 dark:bg-neutral-800 dark:text-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700" href="#">
+                        جشنواره
+                        </a>
+                        <a class="m-1 inline-flex items-center gap-1.5 py-2 px-3 rounded-full text-sm bg-gray-100 text-gray-800 hover:bg-gray-200 focus:outline-none focus:bg-gray-200 dark:bg-neutral-800 dark:text-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700" href="#">
+                        امیرکبیر
+                        </a>
+                        <a class="m-1 inline-flex items-center gap-1.5 py-2 px-3 rounded-full text-sm bg-gray-100 text-gray-800 hover:bg-gray-200 focus:outline-none focus:bg-gray-200 dark:bg-neutral-800 dark:text-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700" href="#">
+                        پایان نامه
+                        </a>
+                        <a class="m-1 inline-flex items-center gap-1.5 py-2 px-3 rounded-full text-sm bg-gray-100 text-gray-800 hover:bg-gray-200 focus:outline-none focus:bg-gray-200 dark:bg-neutral-800 dark:text-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700" href="#">
+                        رساله
+                        </a>
+                    </div>
+                    </div>
+                    <!-- End Content -->
+                </div>
+            </div>
+        <!-- End Blog Article -->
+
+
+      </div>
+    </section>
+
+{% endblock %}

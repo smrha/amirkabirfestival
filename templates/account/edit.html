@@ -33,11 +33,47 @@
       <div class="max-w-2xl px-4 py-8 mx-auto lg:py-16">
           <h2 class="mb-4 text-xl font-bold text-gray-900 dark:text-white">ویرایش مشخصات فردی</h2>
           <form method="POST">
-            {{ user_form.as_p }}
-            {{ profile_form.as_p }}
+            <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
+              <div class="w-full">
+                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ user_form.first_name.label }}</label>
+                {{ user_form.first_name }}
+              </div>
+              <div class="w-full">
+                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ user_form.last_name.label }}</label>
+                {{ user_form.last_name }}
+              </div>
+              <div class="sm:col-span-2">
+                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ user_form.email.label }}</label>
+                {{ user_form.email }}
+              </div>
+              <div class="w-full">
+                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ profile_form.father_name.label }}</label>
+                {{ profile_form.father_name }}
+              </div>
+              <div class="w-full">
+                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ profile_form.national_id.label }}</label>
+                {{ profile_form.national_id }}
+              </div>
+              <div class="w-full">
+                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ profile_form.mobile_number.label }}</label>
+                {{ profile_form.mobile_number }}
+              </div>
+              <div class="w-full">
+                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ profile_form.date_of_birth.label }}</label>
+                {{ profile_form.date_of_birth }}
+              </div>
+              <div class="w-full">
+                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ profile_form.city_of_birth.label }}</label>
+                {{ profile_form.city_of_birth }}
+              </div>
+            
+            </div>
+            
+            {% comment %} {{ user_form.as_p }}
+            {{ profile_form.as_p }} {% endcomment %}
             {% csrf_token %}
 
-              <div class="flex items-center space-x-4">
+              <div class="flex mt-6 items-center space-x-4">
                   <button type="submit" class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
                       ویرایش
                   </button>
