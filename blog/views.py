@@ -3,6 +3,9 @@ from django.views.generic import ListView
 from .models import Post
 
 
+def farakhan(request):
+    return render(request, 'blog/post/farakhan.html')
+
 def olom_payeh(request):
     return render(request, 'blog/post/olom_payeh.html')
 
