@@ -2,7 +2,7 @@
     <!-- Swiper -->
     <div class="swiper mySwiper">
         <div class="swiper-wrapper">
-          <div class="swiper-slide"><a href={% url "blog:farakhan" %}><img src={% static "img/banner.jpg" %}></img></a></div>
+          <div class="swiper-slide"><a href={% url "blog:farakhan" %}><img src={% static "img/banner3.jpg" %}></img></a></div>
           <div class="swiper-slide"><a href={% url "blog:farakhan" %}><img src={% static "img/banner2.jpg" %}></img></a></div>
           {% for post in posts %}
             <div class="swiper-slide"><a href="{{ post.get_absolute_url}}"><img src={{ post.photo.url }}></img></a></div>
