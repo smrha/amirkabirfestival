@@ -8,6 +8,7 @@ urlpatterns = [
     # path('', views.post_list, name='post_list'),
     path('', views.PostListView.as_view(), name='post_list'),
     path('farakhan/', views.farakhan, name='farakhan'),
+    path('about/', views.about, name='about'),
     path('olom_payeh/', views.olom_payeh, name='olom_payeh'),
     path('olom_ensani/', views.olom_ensani, name='olom_ensani'),
     path('fani/', views.fani, name='fani'),

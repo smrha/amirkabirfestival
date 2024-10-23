@@ -6,6 +6,9 @@ from .models import Post
 def farakhan(request):
     return render(request, 'blog/post/farakhan.html')
 
+def about(request):
+    return render(request, 'blog/post/about.html')
+
 def olom_payeh(request):
     return render(request, 'blog/post/olom_payeh.html')
 

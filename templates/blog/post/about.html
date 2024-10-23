@@ -1,0 +1,51 @@
+{% extends "../base.html" %}
+{% load static %}
+
+{% block content %}
+
+<section class="bg-white py-8 antialiased dark:bg-gray-900 md:py-8">
+    <div class="mx-auto max-w-screen-lg px-4 2xl:px-0">
+      <nav class="mb-4 flex" aria-label="Breadcrumb">
+        <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
+          <li class="inline-flex items-center">
+            <a href="#" class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-primary-600 dark:text-gray-400 dark:hover:text-white">
+              <svg class="me-2 h-4 w-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m4 12 8-8 8 8M6 10.5V19a1 1 0 0 0 1 1h3v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3h3a1 1 0 0 0 1-1v-8.5" />
+              </svg>
+              خانه
+            </a>
+          </li>
+        </ol>
+      </nav>
+      
+      <h2 class="mb-4 text-xl font-semibold text-gray-900 dark:text-white sm:text-2xl md:mb-6">دبیرخانه جشنواره</h2>
+      
+      <div class="py-4 md:py-8">
+        <div class="mb-4 grid gap-4 sm:grid-cols-2 sm:gap-8 lg:gap-16">
+          <div class="space-y-4">
+            <div class="flex space-x-4">
+              {% comment %} <img class="h-16 w-16 rounded-lg" src="{% static 'img/user.png' %}" alt="Helene avatar" /> {% endcomment %}
+              <div>
+                {% comment %} <span class="mb-2 inline-block rounded bg-primary-100 px-2.5 py-0.5 text-xs font-medium text-primary-800 dark:bg-primary-900 dark:text-primary-300"> حساب کاربری </span> {% endcomment %}
+                {% comment %} <h2 class="flex items-center text-xl font-bold leading-none text-gray-900 dark:text-white sm:text-2xl">{{ user.last_name }}</h2> {% endcomment %}
+              </div>
+            </div>
+            <dl class="">
+              <dt class="font-semibold text-gray-900 dark:text-white">نشانی دبیرخانه</dt>
+              <dd class="text-gray-500 dark:text-gray-400">کرج، عظيميه، خیابان ندای جنوبی، خيابان خسروي،  پلاك 81 –83، جهاد دانشگاهی واحد استان البرز</dd>
+            </dl>
+            <dl>
+              <dt class="font-semibold text-gray-900 dark:text-white">شماره تماس</dt>
+              <dd class="flex items-center gap-1 text-gray-500 dark:text-gray-400">34505151 - 026  و  32521124 - 026 داخلی120</dd>
+            </dl>
+            
+          </div>
+        </div>
+        
+        
+      </div>
+      
+    </div>
+  </section>
+
+{% endblock content %}>
