@@ -1,4 +1,5 @@
 from django.db import models
+from django_jalali.db import models as jmodels
 from django.contrib.auth.models import User
 from django.urls import reverse
 
@@ -12,14 +13,13 @@ class Article(models.Model):
     adviser = models.CharField(max_length=120)
     adviser_mobile = models.CharField(max_length=11)
     adviser_email = models.CharField(max_length=120)
-    # defense_date = models.DateField()
+    defense_date = jmodels.jDateField(blank=True, null=True)
     article_score = models.IntegerField()
     type = models.CharField(max_length=32)
     Requester = models.CharField(max_length=120)
     Requester_loc = models.CharField(max_length=120)
-    # confirmation = models.CharField(max_length=120)
     summary = models.TextField()
-    # file
+    article_file = models.FileField(upload_to='articles/%Y/%m/%d/', default='articles/default.pdf')
     # other
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
@@ -52,7 +52,7 @@ class Profile(models.Model):
     father_name = models.CharField(max_length=120)
     national_id = models.CharField(max_length=10)
     mobile_number = models.CharField(max_length=11)
-    date_of_birth = models.DateField(blank=True, null=True)
+    date_of_birth = jmodels.jDateField(blank=True, null=True)
     city_of_birth = models.CharField(max_length=120)
 
     created = models.DateTimeField(auto_now_add=True)

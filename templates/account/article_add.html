@@ -31,8 +31,9 @@
     <!-- Account Information Modal -->
     <section class="bg-white dark:bg-gray-900">
       <div class="max-w-2xl px-4 py-8 mx-auto lg:py-16">
-          <h2 class="mb-4 text-xl font-bold text-gray-900 dark:text-white">ویرایش حساب کاربری</h2>
-          <form method="POST">
+          <h2 class="mb-4 text-xl font-bold text-gray-900 dark:text-white">ارسال پایان نامه</h2>
+          <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
             <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
               <div class="sm:col-span-2">
                 <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ form.title.label }}</label>
@@ -42,9 +43,13 @@
                 <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ form.summary.label }}</label>
                 {{ form.summary }}
               </div>
-              <div class="sm:col-span-2">
+              <div class="w-full">
                 <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ form.education_group.label }}</label>
                 {{ form.education_group }}
+              </div>
+              <div class="w-full">
+                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ form.defense_date.label }}</label>
+                {{ form.defense_date }}
               </div>
               <div class="sm:col-span-2">
                 <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ form.teacher.label }}</label>
@@ -57,6 +62,14 @@
               <div class="w-full">
                 <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ form.teacher_email.label }}</label>
                 {{ form.teacher_email }}
+              </div>
+              <div class="w-full">
+                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ form.article_score.label }}</label>
+                {{ form.article_score }}
+              </div>
+              <div class="w-full">
+                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ form.type.label }}</label>
+                {{ form.type }}
               </div>
               <div class="sm:col-span-2">
                 <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ form.adviser.label }}</label>
@@ -71,17 +84,21 @@
                 {{ form.adviser_email }}
               </div>
               <div class="sm:col-span-2">
-                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ form.requester.label }}</label>
-                {{ form.requester }}
+                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ form.Requester.label }}</label>
+                {{ form.Requester }}
               </div>
               <div class="sm:col-span-2">
-                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ form.requester_loc.label }}</label>
-                {{ form.requester_loc }}
+                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ form.Requester_loc.label }}</label>
+                {{ form.Requester_loc }}
+              </div>
+              <div class="sm:col-span-2">
+                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ form.article_file.label }}</label>
+                {{ form.article_file }}
               </div>
 
             </div>
               <div class="flex items-center space-x-4">
-                  <button type="submit" class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                  <button type="submit" class="text-white mt-6 bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
                       ارسال
                   </button>
               </div>

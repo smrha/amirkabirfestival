@@ -1,9 +1,14 @@
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.models import User
+from django_jalali import forms as jforms
+from django_jalali.admin.widgets import AdminjDateWidget
 from django import forms
 from .models import Profile, Education, Article
 
 class DateInput(forms.DateInput):
+    input_type = 'date'
+
+class JdateInput(AdminjDateWidget):
     input_type = 'date'
 
 
@@ -48,9 +53,9 @@ class ArticleForm(forms.ModelForm):
         widget=forms.TextInput(
             attrs={"class": "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"})
         )
-    article_score = forms.CharField(
+    article_score = forms.IntegerField(
         label="نمره رساله",
-        widget=forms.TextInput(
+        widget=forms.NumberInput(
             attrs={"class": "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"})
         )
     type = forms.CharField(
@@ -73,11 +78,22 @@ class ArticleForm(forms.ModelForm):
         widget=forms.TextInput(
             attrs={"class": "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"})
         )
+    article_file = forms.FileField(
+        label="فایل رساله",
+        widget=forms.FileInput(
+            attrs={"class": "block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"})
+        )
+    defense_date = jforms.jDateField(
+        label="فایل رساله",
+        widget=JdateInput(
+            attrs={"class": "block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"})
+        )
+    
     class Meta:
         model = Article
         fields = ['title', 'education_group', 'teacher', 'teacher_mobile', 'teacher_email',
                   'adviser', 'adviser_mobile', 'adviser_email', 'article_score', 'type', 
-                  'summary', 'Requester', 'Requester_loc']
+                  'summary', 'Requester', 'Requester_loc', 'article_file', 'defense_date']
 
 
 
@@ -146,9 +162,9 @@ class ProfileEditForm(forms.ModelForm):
         widget=forms.TextInput(
             attrs={"class": "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"})
     )
-    date_of_birth = forms.DateField(
+    date_of_birth = jforms.jDateField(
         label="تاریخ تولد",
-        widget=DateInput(
+        widget=JdateInput(
             attrs={"class": "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"})
     )
     city_of_birth = forms.CharField(

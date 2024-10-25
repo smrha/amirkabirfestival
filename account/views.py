@@ -17,9 +17,11 @@ def main(request):
 
 def article_add(request):
     if request.method == 'POST':
-        form = ArticleForm(request.POST)
+        form = ArticleForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
+            new_article = form.save(commit=False)
+            new_article.user = request.user
+            new_article.save()
     else:
         form = ArticleForm()
     return render(request, 'account/article_add.html', {'form': form})
