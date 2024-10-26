@@ -16,20 +16,30 @@
   <style>
     html,
     body {
-      {% comment %} position: relative; {% endcomment %}
       height: 100%;
+    }
+
+    .parallax-bg {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 130%;
+      height: 100%;
+      -webkit-background-size: cover;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
     }
 
 
     .swiper {
-      width: 100%;
+      width: 90%;
       height: 80%;
     }
 
     .swiper-slide {
       text-align: center;
       font-size: 18px;
-      background: #fff;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -56,6 +66,8 @@
     {% include 'blog/_faq.html' %}
 
     {% include 'blog/_gallery.html' %}
+
+    {% include 'blog/_subscriber.html' %}
 
     {% include 'blog/_customer.html' %}
 
