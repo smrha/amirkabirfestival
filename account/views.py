@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from .forms import LoginForm, UserEditForm, ProfileEditForm, CustomAuthenticationForm, \
     CustomUserCreationForm, EducationEditForm, ArticleForm
-from .models import Profile, Education
+from .models import Profile, Education, Article
 from blog.models import Post
 
 
@@ -12,9 +12,15 @@ class CustomLoginView(LoginView):
     authentication_form = CustomAuthenticationForm
 
 def main(request):
-    posts = Post.published.all()
-    return render(request, 'blog/main.html', {'posts': posts})
+    posts = Post.published.all().order_by('-created')[:8]
+    banner = posts[:4]
+    return render(request, 'blog/main.html', {'posts': posts, 'banner': banner})
 
+def article_list(request):
+    articles = Article.objects.filter(user=request.user)
+    return render(request, 'account/article_list.html', {'articles': articles})
+
+# Article add item view
 def article_add(request):
     if request.method == 'POST':
         form = ArticleForm(request.POST, request.FILES)
@@ -22,16 +28,27 @@ def article_add(request):
             new_article = form.save(commit=False)
             new_article.user = request.user
             new_article.save()
+            return redirect('account:article_list')
     else:
         form = ArticleForm()
     return render(request, 'account/article_add.html', {'form': form})
+
+def article_edit(request, id):
+    article = Article.objects.get(pk=id)
+    print(article)
+    if request.method == 'POST':
+        form = ArticleForm(request.POST, request.FILES, instance=article)
+        if form.is_valid():
+            form.save()
+    else:
+        form = ArticleForm()
+    return render(request, 'account/article_edit.html', {'form': form})
 
 def education_edit(request):
     if request.method == 'POST':
         form = EducationEditForm(instance=request.user.education, 
                                  data=request.POST)
         if form.is_valid():
-            print("valid")
             form.save()
     else:
         form = EducationEditForm(instance=request.user.education)

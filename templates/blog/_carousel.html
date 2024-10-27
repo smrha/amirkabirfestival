@@ -10,7 +10,7 @@
                 <h1 class="p-9 text-2xl text-primary-950 font-bold">فراخوان افتتاح جشنواره امیر کبیر</h1>
             </div>
           </div>
-          {% for post in posts %}
+          {% for post in banner %}
             <div class="swiper-slide bg-cover" style="background-image: url({{ post.photo.url }})">
                 <div class="absolute bottom-5 bg-white object-bottom bg-opacity-60 shadow-lg w-full px-2 py-1">
                     <a href={{ post.get_absolute_url }}><h1 class="p-9 text-2xl text-primary-950 font-bold">{{ post.title }}</h1></a>

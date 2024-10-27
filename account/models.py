@@ -20,7 +20,8 @@ class Article(models.Model):
     Requester_loc = models.CharField(max_length=120)
     summary = models.TextField()
     article_file = models.FileField(upload_to='articles/%Y/%m/%d/', default='articles/default.pdf')
-    # other
+    other = models.FileField(upload_to='articles/%Y/%m/%d/', default='articles/default.pdf')
+    accept = models.FileField(upload_to='articles/%Y/%m/%d/', default='articles/default.pdf')
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
@@ -54,6 +55,7 @@ class Profile(models.Model):
     mobile_number = models.CharField(max_length=11)
     date_of_birth = jmodels.jDateField(blank=True, null=True)
     city_of_birth = models.CharField(max_length=120)
+    photo = models.ImageField(upload_to='photos/%Y/%m/%d/', default='photos/default.png')
 
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)

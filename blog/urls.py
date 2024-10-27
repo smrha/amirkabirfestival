@@ -7,6 +7,7 @@ urlpatterns = [
     # Post views
     # path('', views.post_list, name='post_list'),
     path('', views.PostListView.as_view(), name='post_list'),
+    path('gallery_first/', views.gallery_first, name='gallery_first'),
     path('farakhan/', views.farakhan, name='farakhan'),
     path('about/', views.about, name='about'),
     path('olom_payeh/', views.olom_payeh, name='olom_payeh'),

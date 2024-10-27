@@ -1,0 +1,154 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<section class="bg-white py-8 antialiased dark:bg-gray-900 md:py-8">
+    <div class="mx-auto max-w-screen-lg px-4 2xl:px-0">
+      <nav class="mb-4 flex" aria-label="Breadcrumb">
+        <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
+          <li class="inline-flex items-center">
+            <a href="#" class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-primary-600 dark:text-gray-400 dark:hover:text-white">
+              <svg class="me-2 h-4 w-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m4 12 8-8 8 8M6 10.5V19a1 1 0 0 0 1 1h3v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3h3a1 1 0 0 0 1-1v-8.5" />
+              </svg>
+              خانه
+            </a>
+          </li>
+          <li>
+            <div class="flex items-center">
+              <svg class="mx-1 h-4 w-4 text-gray-400 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m9 5 7 7-7 7" />
+              </svg>
+              <a href="#" class="ms-1 text-sm font-medium text-gray-700 hover:text-primary-600 dark:text-gray-400 dark:hover:text-white md:ms-2">ارسال رساله / پایان نامه</a>
+            </div>
+          </li>
+        </ol>
+      </nav>
+      <!-- Table Section -->
+      <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
+        <!-- Card -->
+        <div class="flex flex-col">
+          <div class="-m-1.5 overflow-x-auto">
+            <div class="p-1.5 min-w-full inline-block align-middle">
+              <div class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden dark:bg-neutral-800 dark:border-neutral-700">
+                <!-- Header -->
+                <div class="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-b border-gray-200 dark:border-neutral-700">
+                  <div>
+                    <h2 class="text-xl font-semibold text-gray-800 dark:text-neutral-200">
+                      رساله - پایان نامه
+                    </h2>
+                  </div>
+
+                </div>
+                <!-- End Header -->
+
+                <!-- Table -->
+                <table class="min-w-full divide-y divide-gray-200 dark:divide-neutral-700">
+                  <thead class="bg-gray-50 dark:bg-neutral-800">
+                    <tr>
+                      <th scope="col" class="ps-6 lg:ps-3 xl:ps-0 pe-6 py-3 text-start">
+                        <div class="flex items-center gap-x-2">
+                          <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200">
+                            نام رساله
+                          </span>
+                        </div>
+                      </th>
+
+                      <th scope="col" class="px-6 py-3 text-start">
+                        <div class="flex items-center gap-x-2">
+                          <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200">
+                            گروه آموزشی
+                          </span>
+                        </div>
+                      </th>
+
+                      <th scope="col" class="px-6 py-3 text-start">
+                        <div class="flex items-center gap-x-2">
+                          <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200">
+                            وضعیت
+                          </span>
+                        </div>
+                      </th>
+
+                      <th scope="col" class="px-6 py-3 text-start">
+                        <div class="flex items-center gap-x-2">
+                          <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200">
+                            نوع
+                          </span>
+                        </div>
+                      </th>
+
+                      <th scope="col" class="px-6 py-3 text-end"></th>
+                    </tr>
+                  </thead>
+
+                  <tbody class="divide-y divide-gray-200 dark:divide-neutral-700">
+                    {% for article in articles %}
+                    <tr>
+                      <td class="size-px whitespace-nowrap">
+                        <div class="ps-6 lg:ps-3 xl:ps-0 pe-6 py-3">
+                          <div class="flex items-center gap-x-3">
+                            <div class="grow">
+                              <span class="block text-sm font-semibold text-gray-800 dark:text-neutral-200">{{ article.title }}</span>
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                      <td class="h-px w-72 whitespace-nowrap">
+                        <div class="px-6 py-3">
+                          <span class="block text-sm font-semibold text-gray-800 dark:text-neutral-200">{{ article.education_group }}</span>
+                        </div>
+                      </td>
+                      <td class="size-px whitespace-nowrap">
+                        <div class="px-6 py-3">
+                          <span class="py-1 px-1.5 inline-flex items-center gap-x-1 text-xs font-medium bg-teal-100 text-teal-800 rounded-full dark:bg-teal-500/10 dark:text-teal-500">
+                            <svg class="size-2.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                              <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+                            </svg>
+                            ارسال شده به دبیرخانه
+                          </span>
+                        </div>
+                      </td>
+                      <td class="size-px whitespace-nowrap">
+                        <div class="px-6 py-3">
+                          <div class="flex items-center gap-x-3">
+                            <span class="text-xs text-gray-500 dark:text-neutral-500">{{ article.type }}</span>
+                          </div>
+                        </div>
+                      </td>
+                      <td class="size-px whitespace-nowrap">
+                        <div class="px-6 py-1.5">
+                          <a class="inline-flex items-center gap-x-1 text-sm text-blue-600 decoration-2 hover:underline focus:outline-none focus:underline font-medium dark:text-blue-500" href="#">
+                            ویرایش
+                          </a>
+                        </div>
+                      </td>
+                    </tr>
+                    {% endfor %}
+                    
+
+                  </tbody>
+                </table>
+                <!-- End Table -->
+
+                <!-- Footer -->
+                <div class="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-t border-gray-200 dark:border-neutral-700">
+                  <div>
+                  </div>
+
+                
+                </div>
+                <!-- End Footer -->
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- End Card -->
+      </div>
+      <!-- End Table Section -->
+    </div>
+</section>
+
+
+{% endblock content %}>

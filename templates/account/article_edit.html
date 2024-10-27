@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<section class="bg-white py-8 antialiased dark:bg-gray-900 md:py-8">
+    <div class="mx-auto max-w-screen-lg px-4 2xl:px-0">
+      <nav class="mb-4 flex" aria-label="Breadcrumb">
+        <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
+          <li class="inline-flex items-center">
+            <a href="#" class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-primary-600 dark:text-gray-400 dark:hover:text-white">
+              <svg class="me-2 h-4 w-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m4 12 8-8 8 8M6 10.5V19a1 1 0 0 0 1 1h3v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3h3a1 1 0 0 0 1-1v-8.5" />
+              </svg>
+              خانه
+            </a>
+          </li>
+          <li>
+            <div class="flex items-center">
+              <svg class="mx-1 h-4 w-4 text-gray-400 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m9 5 7 7-7 7" />
+              </svg>
+              <a href="#" class="ms-1 text-sm font-medium text-gray-700 hover:text-primary-600 dark:text-gray-400 dark:hover:text-white md:ms-2">ویرایش رساله / پایان نامه</a>
+            </div>
+          </li>
+        </ol>
+      </nav>
+      
+    </div>
+
+    <!-- Account Information Modal -->
+    <section class="bg-white dark:bg-gray-900">
+      <div class="max-w-2xl px-4 py-8 mx-auto lg:py-16">
+          <h2 class="mb-4 text-xl font-bold text-gray-900 dark:text-white">ارسال پایان نامه</h2>
+          <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
+              <div class="sm:col-span-2">
+                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ form.title.label }}</label>
+                {{ form.title }}
+              </div>
+              <div class="sm:col-span-2">
+                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ form.summary.label }}</label>
+                {{ form.summary }}
+              </div>
+              <div class="w-full">
+                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ form.education_group.label }}</label>
+                {{ form.education_group }}
+              </div>
+              <div class="w-full">
+                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ form.defense_date.label }}</label>
+                {{ form.defense_date }}
+              </div>
+              <div class="sm:col-span-2">
+                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ form.teacher.label }}</label>
+                {{ form.teacher }}
+              </div>
+              <div class="w-full">
+                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ form.teacher_mobile.label }}</label>
+                {{ form.teacher_mobile }}
+              </div>
+              <div class="w-full">
+                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ form.teacher_email.label }}</label>
+                {{ form.teacher_email }}
+              </div>
+              <div class="w-full">
+                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ form.article_score.label }}</label>
+                {{ form.article_score }}
+              </div>
+              <div class="w-full">
+                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ form.type.label }}</label>
+                {{ form.type }}
+              </div>
+              <div class="sm:col-span-2">
+                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ form.adviser.label }}</label>
+                {{ form.adviser }}
+              </div>
+              <div class="w-full">
+                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ form.adviser_mobile.label }}</label>
+                {{ form.adviser_mobile }}
+              </div>
+              <div class="w-full">
+                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ form.adviser_email.label }}</label>
+                {{ form.adviser_email }}
+              </div>
+              <div class="sm:col-span-2">
+                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ form.Requester.label }}</label>
+                {{ form.Requester }}
+              </div>
+              <div class="sm:col-span-2">
+                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ form.Requester_loc.label }}</label>
+                {{ form.Requester_loc }}
+              </div>
+              <div class="sm:col-span-2">
+                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ form.article_file.label }}</label>
+                {{ form.article_file }}
+              </div>
+              <div class="sm:col-span-2">
+                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ form.other.label }}</label>
+                {{ form.other }}
+              </div>
+              <div class="sm:col-span-2">
+                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ form.accept.label }}</label>
+                {{ form.accept }}
+              </div>
+
+            </div>
+              <div class="flex items-center space-x-4">
+                  <button type="submit" class="text-white mt-6 bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                      ارسال
+                  </button>
+              </div>
+          </form>
+      </div>
+    </section>
+
+{% endblock content %}>

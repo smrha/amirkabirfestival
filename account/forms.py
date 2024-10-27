@@ -5,11 +5,29 @@ from django_jalali.admin.widgets import AdminjDateWidget
 from django import forms
 from .models import Profile, Education, Article
 
+from jalali_date.fields import JalaliDateField
+from jalali_date.widgets import AdminJalaliDateWidget
+
 class DateInput(forms.DateInput):
     input_type = 'date'
 
 class JdateInput(AdminjDateWidget):
     input_type = 'date'
+
+GROUP_CHOICES = (
+    ('فنی و مهندسی', 'فنی و مهندسی'),
+    ('علوم انسانی', 'علوم انسانی'),
+    ('علوم پایه', 'علوم پایه'),
+    ('علوم پزشکی', 'علوم پزشکی'),
+    ('دامپزشکی و علوم دامی', 'دامپزشکی و علوم دامی'),
+    ('هنر و معماری', 'هنر و معماری'),
+    ('کشاورزی، منابع طبیعی و محیط زیست', 'کشاورزی، منابع طبیعی و محیط زیست'),
+)
+
+TYPE_CHOICES = (
+    ('کاربردی', 'کاربردی'),
+    ('کارفرمایی', 'کارفرمایی'),
+)
 
 
 class ArticleForm(forms.ModelForm):
@@ -20,7 +38,7 @@ class ArticleForm(forms.ModelForm):
         )
     education_group = forms.CharField(
         label="گروه آموزشی",
-        widget=forms.TextInput(
+        widget=forms.Select(choices=GROUP_CHOICES,
             attrs={"class": "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"})
         )
     teacher = forms.CharField(
@@ -60,11 +78,11 @@ class ArticleForm(forms.ModelForm):
         )
     type = forms.CharField(
         label="نوع رساله",
-        widget=forms.TextInput(
+        widget=forms.Select(choices=TYPE_CHOICES,
             attrs={"class": "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"})
         )
     summary = forms.CharField(
-        label="خلاصه",
+        label="چکیده  رساله / پایان نامه",
         widget=forms.Textarea(
             attrs={"class": "block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"})
         )
@@ -83,17 +101,27 @@ class ArticleForm(forms.ModelForm):
         widget=forms.FileInput(
             attrs={"class": "block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"})
         )
-    defense_date = jforms.jDateField(
-        label="فایل رساله",
-        widget=JdateInput(
+    other = forms.FileField(
+        label="دیگر فایل ها",
+        widget=forms.FileInput(
+            attrs={"class": "block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"})
+        )
+    accept = forms.FileField(
+        label="تأییدیه حسن انجام کار یا گواهی کارفرما",
+        widget=forms.FileInput(
             attrs={"class": "block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"})
         )
     
     class Meta:
         model = Article
         fields = ['title', 'education_group', 'teacher', 'teacher_mobile', 'teacher_email',
-                  'adviser', 'adviser_mobile', 'adviser_email', 'article_score', 'type', 
-                  'summary', 'Requester', 'Requester_loc', 'article_file', 'defense_date']
+                  'adviser', 'adviser_mobile', 'adviser_email', 'article_score', 'type', 'accept',
+                  'summary', 'Requester', 'Requester_loc', 'article_file', 'defense_date', 'other']
+    
+    def __init__(self, *args, **kwargs):
+        super(ArticleForm, self).__init__(*args, **kwargs)
+        self.fields['defense_date']=JalaliDateField(label=('تاریخ دفاع'),
+                                              widget=AdminJalaliDateWidget)
 
 
 
@@ -162,21 +190,30 @@ class ProfileEditForm(forms.ModelForm):
         widget=forms.TextInput(
             attrs={"class": "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"})
     )
-    date_of_birth = jforms.jDateField(
-        label="تاریخ تولد",
-        widget=JdateInput(
-            attrs={"class": "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"})
-    )
+    # date_of_birth = JalaliDateField(
+    #     label="تاریخ تولد",
+    #     widget=AdminDateWidget(
+    #         attrs={"class": ""})
+    # )
     city_of_birth = forms.CharField(
         label="محل تولد",
         widget=forms.TextInput(
             attrs={"class": "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"})
     )
-    
+    photo = forms.ImageField(
+        label='عکس',
+        widget=forms.FileInput(
+            attrs={"class": "block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"})            
+    )
+
     class Meta:
         model = Profile
-        fields = ['father_name', 'national_id', 'mobile_number', 'date_of_birth', 'city_of_birth']
+        fields = ['father_name', 'national_id', 'mobile_number', 'date_of_birth', 'city_of_birth', 'photo']
 
+    def __init__(self, *args, **kwargs):
+        super(ProfileEditForm, self).__init__(*args, **kwargs)
+        self.fields['date_of_birth']=JalaliDateField(label=('تاریخ تولد'),
+                                              widget=AdminJalaliDateWidget)
 
 class CustomUserCreationForm(UserCreationForm):
     username = forms.CharField(

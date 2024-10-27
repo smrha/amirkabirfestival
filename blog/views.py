@@ -3,6 +3,9 @@ from django.views.generic import ListView
 from .models import Post
 
 
+def gallery_first(request):
+    return render(request, 'blog/post/gallery1.html')
+
 def farakhan(request):
     return render(request, 'blog/post/farakhan.html')
 

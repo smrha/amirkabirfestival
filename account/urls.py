@@ -9,7 +9,9 @@ urlpatterns = [
     path('login/', views.CustomLoginView.as_view(), name='login'),
     path('logout/', views.user_logout, name='logout'),
     path('register/', views.user_register, name='register'),
-    path('edit', views.profile_edit, name="edit"),
-    path('education', views.education_edit, name="education"),
-    path('article', views.article_add, name="article"),
+    path('edit/', views.profile_edit, name="edit"),
+    path('education/', views.education_edit, name="education"),
+    path('article/', views.article_add, name="article"),
+    path('article/list', views.article_list, name="article_list"),
+    path('article/edit/<id>', views.article_edit, name="article_edit"),
 ]
