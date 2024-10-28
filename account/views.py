@@ -12,7 +12,7 @@ class CustomLoginView(LoginView):
     authentication_form = CustomAuthenticationForm
 
 def main(request):
-    posts = Post.published.all().order_by('-created')[:8]
+    posts = Post.published.all().order_by('-publish')[:8]
     banner = posts[:4]
     return render(request, 'blog/main.html', {'posts': posts, 'banner': banner})
 
