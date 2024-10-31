@@ -6,6 +6,12 @@ from .models import Post
 def gallery_first(request):
     return render(request, 'blog/post/gallery1.html')
 
+def gallery_second(request):
+    return render(request, 'blog/post/gallery2.html')
+
+def gallery_third(request):
+    return render(request, 'blog/post/gallery3.html')
+
 def farakhan(request):
     return render(request, 'blog/post/farakhan.html')
 

@@ -15,7 +15,7 @@ class Article(models.Model):
     adviser_email = models.CharField(max_length=120)
     defense_date = jmodels.jDateField(blank=True, null=True)
     article_score = models.IntegerField()
-    type = models.CharField(max_length=32)
+    # type = models.CharField(max_length=32)
     Requester = models.CharField(max_length=120)
     Requester_loc = models.CharField(max_length=120)
     summary = models.TextField()

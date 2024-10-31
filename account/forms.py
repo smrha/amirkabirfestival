@@ -72,13 +72,8 @@ class ArticleForm(forms.ModelForm):
             attrs={"class": "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"})
         )
     article_score = forms.IntegerField(
-        label="نمره رساله",
+        label="نمره رساله / پایان نامه",
         widget=forms.NumberInput(
-            attrs={"class": "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"})
-        )
-    type = forms.CharField(
-        label="نوع رساله",
-        widget=forms.Select(choices=TYPE_CHOICES,
             attrs={"class": "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"})
         )
     summary = forms.CharField(
@@ -97,7 +92,7 @@ class ArticleForm(forms.ModelForm):
             attrs={"class": "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"})
         )
     article_file = forms.FileField(
-        label="فایل رساله",
+        label="فایل رساله / پایان نامه",
         widget=forms.FileInput(
             attrs={"class": "block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"})
         )
@@ -115,7 +110,7 @@ class ArticleForm(forms.ModelForm):
     class Meta:
         model = Article
         fields = ['title', 'education_group', 'teacher', 'teacher_mobile', 'teacher_email',
-                  'adviser', 'adviser_mobile', 'adviser_email', 'article_score', 'type', 'accept',
+                  'adviser', 'adviser_mobile', 'adviser_email', 'article_score', 'accept',
                   'summary', 'Requester', 'Requester_loc', 'article_file', 'defense_date', 'other']
     
     def __init__(self, *args, **kwargs):
