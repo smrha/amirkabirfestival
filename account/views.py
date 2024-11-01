@@ -2,6 +2,7 @@ from django.contrib.auth.views import LoginView
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from .forms import LoginForm, UserEditForm, ProfileEditForm, CustomAuthenticationForm, \
     CustomUserCreationForm, EducationEditForm, ArticleForm
 from .models import Profile, Education, Article
@@ -12,9 +13,19 @@ class CustomLoginView(LoginView):
     authentication_form = CustomAuthenticationForm
 
 def main(request):
-    posts = Post.published.all().order_by('-publish')[:8]
-    banner = posts[:4]
-    return render(request, 'blog/main.html', {'posts': posts, 'banner': banner})
+    posts = Post.published.all().order_by('-publish')
+    paginator = Paginator(posts, 8)
+    page = request.GET.get('page', 1)
+    
+    try:
+        result = paginator.page(page)
+    except PageNotAnInteger:
+        result = paginator.page(1)
+    except EmptyPage:
+        result = paginator.page(paginator.num_pages)
+
+    banner = posts.filter(category="IM")[:4]
+    return render(request, 'blog/main.html', {'posts': result, 'banner': banner})
 
 def article_list(request):
     articles = Article.objects.filter(user=request.user)

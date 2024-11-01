@@ -1,0 +1,22 @@
+ {% load static %}
+ <footer class="pt-4 pb-2 bg-primary-50 lg:pt-12 ">
+    <div class="container mx-auto text-center shadow-custom1 rounded-[10px] bg-white">
+        <a href={% url 'main' %} class="flex justify-center items-center text-2xl font-semibold pt-8">
+            <img src={% static 'img/logo-wide.png' %} alt="">    
+        </a>
+        <p class="my-6 text-gray-500 dark:text-gray-400">جشنواره ملی پایان نامه های کاربردی کارفرما محوز</p>
+        <ul class="flex flex-wrap justify-center items-center mb-6 text-gray-900 dark:text-white">
+            <li>
+                <a href="#" class="mr-4 hover:underline md:mr-6 ">خانه</a>
+            </li>
+            <li>
+                <a href="#" class="mr-4 hover:underline md:mr-6">درباره ما</a>
+            </li>
+            <li>
+                <a href="#" class="mr-4 hover:underline md:mr-6 ">اخبار</a>
+            </li>
+            </li>
+        </ul>
+        <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">طراحی و توسعه توسط SMRHA</span>
+    </div>
+  </footer>

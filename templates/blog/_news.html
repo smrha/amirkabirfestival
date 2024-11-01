@@ -1,6 +1,6 @@
 {% load static %}
 <section class="dark:bg-gray-900">
-    <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
+    <div class="container flex flex-col justify-between py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
         <div class="mx-auto max-w-screen-sm text-center lg:mb-16 mb-8">
             <h2 class="mb-4 text-3xl lg:text-4xl tracking-tight font-extrabold text-primary-950 dark:text-white">اخبار جشنواره</h2>
         </div> 
@@ -17,7 +17,7 @@
                 <img class="bg-fixed text-center rounded-t-lg" src={{ post.photo.url }} alt="" />
                 <h2 class="mb-2 pt-4 text-xl text-center font-bold tracking-tight text-gray-900 dark:text-white"><a href={{ post.get_absolute_url }}>{{ post.title }}</a></h2>
                 
-                <div class="flex justify-between items-center">
+                <div class="flex flex-col justify-between items-center">
                     <div class="flex items-center space-x-4">
                         <img class="w-7 h-7 rounded-full" src="{% static 'img/user.png' %}" alt="" />
                         <span class="font-medium dark:text-white pr-2">
@@ -31,6 +31,28 @@
                 </div>
             </article>
             {% endfor %}               
-        </div>  
+        </div>
+
+
+<div class="flex w-[300px] p-8 gap-x-8 items-center text-center justify-center">
+    <!-- Previous Button -->
+     {% if posts.has_previous %}
+    <a href="?page={{ posts.previous_page_number }}" class="flex items-center justify-center px-3 h-8 me-3 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+      <svg class="w-3.5 h-3.5 me-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5H1m0 0 4 4M1 5l4-4"/>
+      </svg>
+      قبلی
+    </a>
+    {% endif %}
+    {% if posts.has_next %}
+    <a href="?page={{ posts.next_page_number }}" class="flex items-center justify-center px-3 h-8 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+        بعدی
+        <svg class="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+        </svg>
+      </a>
+    {% endif %}
+  </div>
+  
     </div>
   </section>

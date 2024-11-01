@@ -17,6 +17,10 @@ class Post(models.Model):
         DRAFT = 'DF', 'Draft'
         PUBLISHED = 'PB', 'Published'
 
+    class Category(models.TextChoices):
+        DEFAULT = 'DF', 'پیش فرض'
+        IMPORTANT = 'IM', 'اخبار مهم'
+
     title = models.CharField(max_length=250)
     slug = models.SlugField(max_length=250,
                             unique_for_date='publish')
@@ -31,6 +35,9 @@ class Post(models.Model):
     status = models.CharField(max_length=2,
                               choices=Status.choices,
                               default=Status.DRAFT)
+    category = models.CharField(max_length=2,
+                              choices=Category.choices,
+                              default=Category.DEFAULT)
     photo = models.ImageField(upload_to='users/%Y/%m/%d/',
                               blank=True)
 
