@@ -4,8 +4,15 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 
 class Article(models.Model):
+    class Status(models.TextChoices):
+        UPLOADED = 'UPL'
+        REVIEW = 'REV'
+        ACCEPTED = 'ACC'
     user =  models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_articles')
     title = models.CharField(max_length=255)
+    status = models.CharField(max_length=3,
+                              choices=Status.choices,
+                              default=Status.UPLOADED)
     education_group = models.CharField(max_length=64)
     teacher = models.CharField(max_length=120)
     teacher_mobile = models.CharField(max_length=11)

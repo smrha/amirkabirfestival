@@ -2039,6 +2039,10 @@ button {
   grid-template-columns: repeat(8, minmax(0, 1fr));
 }
 
+.grid-cols-10 {
+  grid-template-columns: repeat(10, minmax(0, 1fr));
+}
+
 .flex-row {
   flex-direction: row;
 }
