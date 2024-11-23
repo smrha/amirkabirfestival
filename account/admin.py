@@ -5,8 +5,11 @@ from .models import Profile, Education, Article, Ticket
 
 @admin.register(Article)
 class ArticleAdmin(admin.ModelAdmin):
-    list_display = ['user', 'title', 'teacher']
+    list_display = ['user', 'author_name', 'title', 'teacher']
     raw_id_fields = ['user']
+
+    def author_name(self, obj):
+        return f"{obj.user.first_name} {obj.user.last_name}"
 
 
 @admin.register(Profile)

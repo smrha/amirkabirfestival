@@ -29,6 +29,7 @@ class Post(models.Model):
                                related_name='blog_posts')
     lead = models.TextField()
     body = RichTextField()
+    views = models.PositiveIntegerField(default=0)
     publish = models.DateTimeField(default=timezone.now)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
