@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Profile, Education, Article
+from .models import Profile, Education, Article, Ticket
 
 
 @admin.register(Article)
@@ -19,3 +19,8 @@ class ProfileAdmin(admin.ModelAdmin):
 class EducationAdmin(admin.ModelAdmin):
     list_display = ['user']
     raw_id_fields = ['user']
+
+
+@admin.register(Ticket)
+class TicketAdmin(admin.ModelAdmin):
+    list_display = ['title', 'creator']

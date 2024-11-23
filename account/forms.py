@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django_jalali import forms as jforms
 from django_jalali.admin.widgets import AdminjDateWidget
 from django import forms
-from .models import Profile, Education, Article
+from .models import Profile, Education, Article, Ticket
 
 from jalali_date.fields import JalaliDateField
 from jalali_date.widgets import AdminJalaliDateWidget
@@ -29,6 +29,22 @@ TYPE_CHOICES = (
     ('کارفرمایی', 'کارفرمایی'),
 )
 
+
+class TicketForm(forms.ModelForm):
+    title = forms.CharField(
+        label="عنوان",
+        widget=forms.TextInput(
+            attrs={"class": "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"})
+        )
+    description = forms.CharField(
+        label="توضیحات",
+        widget=forms.Textarea(
+            attrs={"class": "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"})
+        )
+    
+    class Meta:
+        model = Ticket
+        fields = ['title', 'description']
 
 class ArticleForm(forms.ModelForm):
     title = forms.CharField(

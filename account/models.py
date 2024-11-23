@@ -75,3 +75,17 @@ class Profile(models.Model):
 
     # def get_absolute_url(self):
     #     return reverse('account:user_profile', args=[self.id])
+
+
+class Ticket(models.Model):
+    title = models.CharField(max_length=200)
+    creator = models.ForeignKey(User, on_delete=models.CASCADE)
+    description = models.TextField()
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['-created']
+
+    def __str__(self):
+        return self.title

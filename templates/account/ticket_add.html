@@ -1,6 +1,5 @@
 {% extends "base.html" %}
 {% load static %}
-{% load jalali_tags %}
 
 {% block content %}
 
@@ -9,7 +8,7 @@
       <nav class="mb-4 flex" aria-label="Breadcrumb">
         <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
           <li class="inline-flex items-center">
-            <a href="{% url 'account:home'%}" class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-primary-600 dark:text-gray-400 dark:hover:text-white">
+            <a href="#" class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-primary-600 dark:text-gray-400 dark:hover:text-white">
               <svg class="me-2 h-4 w-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m4 12 8-8 8 8M6 10.5V19a1 1 0 0 0 1 1h3v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3h3a1 1 0 0 0 1-1v-8.5" />
               </svg>
@@ -21,12 +20,11 @@
               <svg class="mx-1 h-4 w-4 text-gray-400 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m9 5 7 7-7 7" />
               </svg>
-              <a href="{% url 'account:edit'%}" class="ms-1 text-sm font-medium text-gray-700 hover:text-primary-600 dark:text-gray-400 dark:hover:text-white md:ms-2">ویرایش مشخصات فردی</a>
+              <a href="#" class="ms-1 text-sm font-medium text-gray-700 hover:text-primary-600 dark:text-gray-400 dark:hover:text-white md:ms-2">ارسال تیکت</a>
             </div>
           </li>
         </ol>
       </nav>
-
       <!-- Start Notification -->
       {% if messages %}
         {% for message in messages %}
@@ -67,58 +65,28 @@
         {% endfor %}
       {% endif %}
       <!-- End Notification -->
-
     </div>
 
     <!-- Account Information Modal -->
     <section class="bg-white dark:bg-gray-900">
       <div class="max-w-2xl px-4 py-8 mx-auto lg:py-16">
-          <h2 class="mb-4 text-xl font-bold text-gray-900 dark:text-white">ویرایش مشخصات فردی</h2>
+          <h2 class="mb-4 text-xl font-bold text-gray-900 dark:text-white">ارسال تیکت</h2>
           <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
             <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
-              <div class="w-full">
-                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ user_form.first_name.label }}</label>
-                {{ user_form.first_name }}
-              </div>
-              <div class="w-full">
-                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ user_form.last_name.label }}</label>
-                {{ user_form.last_name }}
+              <div class="sm:col-span-2">
+                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ form.title.label }}</label>
+                {{ form.title }}
               </div>
               <div class="sm:col-span-2">
-                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ user_form.email.label }}</label>
-                {{ user_form.email }}
+                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ form.description.label }}</label>
+                {{ form.description }}
               </div>
-              <div class="w-full">
-                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ profile_form.father_name.label }}</label>
-                {{ profile_form.father_name }}
-              </div>
-              <div class="w-full">
-                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ profile_form.national_id.label }}</label>
-                {{ profile_form.national_id }}
-              </div>
-              <div class="w-full">
-                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ profile_form.mobile_number.label }}</label>
-                {{ profile_form.mobile_number }}
-              </div>
-              <div class="w-full">
-                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ profile_form.date_of_birth.label }}</label>
-                {{ profile_form.date_of_birth }}
-              </div>
-              <div class="w-full">
-                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ profile_form.city_of_birth.label }}</label>
-                {{ profile_form.city_of_birth }}
-              </div>
-              <div class="w-full">
-                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ profile_form.photo.label }}</label>
-                {{ profile_form.photo }}
-              </div>
-            
-            </div>
-            {% csrf_token %}
 
-              <div class="flex mt-6 items-center space-x-4">
-                  <button type="submit" class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
-                      ویرایش
+            </div>
+              <div class="flex items-center space-x-4">
+                  <button type="submit" class="text-white mt-6 bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                      ارسال
                   </button>
               </div>
           </form>
