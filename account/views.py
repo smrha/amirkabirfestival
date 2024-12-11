@@ -65,13 +65,10 @@ def article_add(request):
 
 def article_edit(request, id):
     article = Article.objects.get(pk=id)
-    print(article)
+    form = ArticleForm(request.POST or None, request.FILES or None, instance=article)
     if request.method == 'POST':
-        form = ArticleForm(request.POST, request.FILES, instance=article)
         if form.is_valid():
             form.save()
-    else:
-        form = ArticleForm()
     return render(request, 'account/article_edit.html', {'form': form})
 
 # User education profile edit view

@@ -21,7 +21,7 @@ class Article(models.Model):
     adviser_mobile = models.CharField(max_length=11)
     adviser_email = models.CharField(max_length=120)
     defense_date = jmodels.jDateField(blank=True, null=True)
-    article_score = models.IntegerField()
+    article_score = models.FloatField()
     # type = models.CharField(max_length=32)
     Requester = models.CharField(max_length=120)
     Requester_loc = models.CharField(max_length=120)
@@ -43,7 +43,7 @@ class Education(models.Model):
     university = models.CharField(max_length=120, blank=True)
     field_study = models.CharField(max_length=120, blank=True)
     degree = models.CharField(max_length=120)
-    score = models.IntegerField(default=0)
+    score = models.FloatField(default=0)
 
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
