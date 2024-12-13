@@ -2,6 +2,7 @@ from django.contrib.auth.views import LoginView
 from django.contrib import messages
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
+from django.views import View
 from django.contrib.auth import authenticate, login, logout
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from .forms import LoginForm, UserEditForm, ProfileEditForm, CustomAuthenticationForm, \
@@ -12,6 +13,77 @@ from blog.models import Post
 
 class CustomLoginView(LoginView):
     authentication_form = CustomAuthenticationForm
+
+# A Class Based View for create and upload a new article
+class ArticleCreateView(View):
+    form_class = ArticleForm
+    template_name = "account/article_create.html"
+
+    def get(self, request):
+        form = self.form_class()
+        return render(request, self.template_name, {'form': form})
+    
+    def post(self, request):
+        form = self.form_class(request.POST, request.FILES)
+        if form.is_valid():
+            new_article = form.save(commit=False)
+            new_article.user = request.user
+            new_article.save()
+            messages.success(request, 'رساله شما با موفقیت ارسال شد.')
+            return redirect('account:article_list')
+        else:
+            messages.error(request, 'خطا در ارسال رساله.')
+        return render(request, self.template_name, {'form': form})
+
+
+
+# A Class Based View for update an article
+class ArticleUpdateView(View):
+
+    def get(self, request, id):
+        article = Article.objects.get(pk=id)
+        form = ArticleForm(request.POST or None, request.FILES or None, instance=article)
+        return render(request, 'account/article_edit.html', {'form': form, 'article': article})
+    
+    def post(self, request, id):
+        article = Article.objects.get(pk=id)
+        form = ArticleForm(request.POST or None, request.FILES or None, instance=article)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'بروزرسانی رساله با موفقیت انجام شد.')
+            return redirect("account:article_list")
+        else:
+            messages.error(request, ' خطا در بروزرسانی رساله.')
+        return render(request, 'account/article_edit.html', {'form': form, 'article': article})        
+
+# def article_edit(request, id):
+#     article = Article.objects.get(pk=id)
+#     form = ArticleForm(request.POST or None, request.FILES or None, instance=article)
+#     if request.method == 'POST':
+#         if form.is_valid():
+#             form.save()
+#             messages.success(request, 'بروزرسانی انجام شد.')
+#             return redirect("account:article_list")
+#         else:
+#             messages.error(request, 'خطا در بروزرسانی')
+#     return render(request, 'account/article_edit.html', {'form': form, 'article': article})
+
+# Article add item view
+# def article_add(request):
+#     if request.method == 'POST':
+#         form = ArticleForm(request.POST, request.FILES)
+#         if form.is_valid():
+#             new_article = form.save(commit=False)
+#             new_article.user = request.user
+#             new_article.save()
+#             messages.success(request, 'بروزرسانی انجام شد.')
+#             return redirect('account:article_list')
+#         else:
+#             messages.error(request, 'خطا در بروزرسانی')
+#     else:
+#         form = ArticleForm()
+#     return render(request, 'account/article_add.html', {'form': form})
+
 
 def main(request):
     posts = Post.published.all().order_by('-publish')
@@ -26,7 +98,7 @@ def main(request):
         result = paginator.page(paginator.num_pages)
 
     banner = posts.filter(category="IM")[:4]
-    return render(request, 'blog/main.html', {'posts': result, 'banner': banner})
+    return render(request, 'blog/base.html', {'posts': result, 'banner': banner})
 
 # Add a ticket view
 def ticket_add(request):
@@ -47,29 +119,7 @@ def article_list(request):
     articles = Article.objects.filter(user=request.user)
     return render(request, 'account/article_list.html', {'articles': articles})
 
-# Article add item view
-def article_add(request):
-    if request.method == 'POST':
-        form = ArticleForm(request.POST, request.FILES)
-        if form.is_valid():
-            new_article = form.save(commit=False)
-            new_article.user = request.user
-            new_article.save()
-            messages.success(request, 'بروزرسانی انجام شد.')
-            return redirect('account:article_list')
-        else:
-            messages.error(request, 'خطا در بروزرسانی')
-    else:
-        form = ArticleForm()
-    return render(request, 'account/article_add.html', {'form': form})
 
-def article_edit(request, id):
-    article = Article.objects.get(pk=id)
-    form = ArticleForm(request.POST or None, request.FILES or None, instance=article)
-    if request.method == 'POST':
-        if form.is_valid():
-            form.save()
-    return render(request, 'account/article_edit.html', {'form': form})
 
 # User education profile edit view
 def education_edit(request):

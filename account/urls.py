@@ -11,8 +11,8 @@ urlpatterns = [
     path('register/', views.user_register, name='register'),
     path('edit/', views.profile_edit, name="edit"),
     path('education/', views.education_edit, name="education"),
-    path('article/', views.article_add, name="article"),
+    path('article/', views.ArticleCreateView.as_view(), name="article"),
     path('article/list', views.article_list, name="article_list"),
-    path('article/edit/<id>', views.article_edit, name="article_edit"),
+    path('article/edit/<int:id>', views.ArticleUpdateView.as_view(), name="article_edit"),
     path('ticket/add/', views.ticket_add, name='ticket_add'),
 ]

@@ -47,77 +47,93 @@ class TicketForm(forms.ModelForm):
         fields = ['title', 'description']
 
 class ArticleForm(forms.ModelForm):
+    required_error_message = "فیلد الزامی می باشد"
     title = forms.CharField(
+        error_messages={"required": required_error_message},
         label="عنوان رساله / پایان نامه",
         widget=forms.TextInput(
             attrs={"class": "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"})
         )
     education_group = forms.CharField(
+        error_messages={"required": required_error_message},
         label="گروه آموزشی",
         widget=forms.Select(choices=GROUP_CHOICES,
             attrs={"class": "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"})
         )
     teacher = forms.CharField(
+        error_messages={"required": required_error_message},
         label="نام استاد راهنما",
         widget=forms.TextInput(
             attrs={"class": "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"})
         )
     teacher_mobile = forms.CharField(
+        error_messages={"required": required_error_message},
         label="موبایل استاد راهنما",
         widget=forms.TextInput(
             attrs={"class": "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"})
         )
     teacher_email = forms.CharField(
+        error_messages={"required": required_error_message},
         label="ایمیل استاد راهنما",
         widget=forms.TextInput(
             attrs={"class": "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"})
         )
     adviser = forms.CharField(
+        error_messages={"required": required_error_message},
         label="نام استاد مشاور",
         widget=forms.TextInput(
             attrs={"class": "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"})
         )
     adviser_mobile = forms.CharField(
+        error_messages={"required": required_error_message},
         label="موبایل استاد مشاور",
         widget=forms.TextInput(
             attrs={"class": "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"})
         )
     adviser_email = forms.CharField(
+        error_messages={"required": required_error_message},
         label="ایمیل استاد مشاور",
         widget=forms.TextInput(
             attrs={"class": "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"})
         )
     article_score = forms.FloatField(
+        error_messages={"required": required_error_message},
         label="نمره رساله / پایان نامه",
         widget=forms.NumberInput(
             attrs={"class": "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"})
         )
     summary = forms.CharField(
+        error_messages={"required": required_error_message},
         label="چکیده  رساله / پایان نامه",
         widget=forms.Textarea(
             attrs={"class": "block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"})
         )
     Requester = forms.CharField(
+        error_messages={"required": required_error_message},
         label="تقاضا دهنده",
         widget=forms.TextInput(
             attrs={"class": "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"})
         )
     Requester_loc = forms.CharField(
+        error_messages={"required": required_error_message},
         label="آدرس تقاضا دهنده",
         widget=forms.TextInput(
             attrs={"class": "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"})
         )
     article_file = forms.FileField(
+        error_messages={"required": required_error_message},
         label="فایل رساله / پایان نامه",
         widget=forms.FileInput(
             attrs={"class": "block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"})
         )
     other = forms.FileField(
+        error_messages={"required": required_error_message},
         label="دیگر فایل ها",
         widget=forms.FileInput(
             attrs={"class": "block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"})
         )
     accept = forms.FileField(
+        error_messages={"required": required_error_message},
         label="تأییدیه حسن انجام کار یا گواهی کارفرما",
         widget=forms.FileInput(
             attrs={"class": "block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"})

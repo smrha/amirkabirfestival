@@ -71,72 +71,92 @@
     <section class="bg-white dark:bg-gray-900">
       <div class="max-w-2xl px-4 py-8 mx-auto lg:py-16">
           <h2 class="mb-4 text-xl font-bold text-gray-900 dark:text-white">ارسال پایان نامه</h2>
-          <form method="POST" enctype="multipart/form-data">
+          <form method="POST" enctype="multipart/form-data" novalidate>
             {% csrf_token %}
             <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
               <div class="sm:col-span-2">
                 <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ form.title.label }}</label>
                 {{ form.title }}
+                {% if form.title.errors %}
+                <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+                  <span class="font-medium">خطا</span>{{ form.title.errors}}
+                </div>
+                {% endif %}
               </div>
               <div class="sm:col-span-2">
                 <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ form.summary.label }}</label>
                 {{ form.summary }}
+                {{ form.summary.errors}}
               </div>
               <div class="w-full">
                 <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ form.education_group.label }}</label>
                 {{ form.education_group }}
+                {{ form.education_group.errors }}
               </div>
               <div class="w-full">
                 <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ form.defense_date.label }}</label>
                 {{ form.defense_date }}
+                {{ form.defense_date.errors }}
               </div>
               <div class="sm:col-span-2">
                 <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ form.teacher.label }}</label>
                 {{ form.teacher }}
+                {{ form.teacher.errors }}
               </div>
               <div class="w-full">
                 <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ form.teacher_mobile.label }}</label>
                 {{ form.teacher_mobile }}
+                {{ form.teacher_mobile.errors }}
               </div>
               <div class="w-full">
                 <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ form.teacher_email.label }}</label>
                 {{ form.teacher_email }}
+                {{ form.teacher_email.errors }}
               </div>
               <div class="w-full">
                 <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ form.article_score.label }}</label>
                 {{ form.article_score }}
+                {{ form.article_score.errors }}
               </div>
               <div class="sm:col-span-2">
                 <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ form.adviser.label }}</label>
                 {{ form.adviser }}
+                {{ form.adviser.errors }}
               </div>
               <div class="w-full">
                 <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ form.adviser_mobile.label }}</label>
                 {{ form.adviser_mobile }}
+                {{ form.adviser_mobile.errors }}
               </div>
               <div class="w-full">
                 <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ form.adviser_email.label }}</label>
                 {{ form.adviser_email }}
+                {{ form.adviser_email.errors }}
               </div>
               <div class="sm:col-span-2">
                 <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ form.Requester.label }}</label>
                 {{ form.Requester }}
+                {{ form.Requester.errors }}
               </div>
               <div class="sm:col-span-2">
                 <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ form.Requester_loc.label }}</label>
                 {{ form.Requester_loc }}
+                {{ form.Requester_loc.errors }}
               </div>
               <div class="sm:col-span-2">
                 <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ form.article_file.label }}</label>
                 {{ form.article_file }}
+                {{ form.article_file.errors }}
               </div>
               <div class="sm:col-span-2">
                 <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ form.other.label }}</label>
                 {{ form.other }}
+                {{ form.other.errors }}
               </div>
               <div class="sm:col-span-2">
                 <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ form.accept.label }}</label>
                 {{ form.accept }}
+                {{ form.accept.errors }}
               </div>
 
             </div>
