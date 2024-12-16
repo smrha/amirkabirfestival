@@ -1,0 +1,56 @@
+{% load static %}
+<section class="py-12 xl:pt-12 xl:pb-0">
+    <div class="container h-full bg-white rounded-[10px] shadow-custom1 py-8 px-4 mx-auto lg:py-16 lg:px-6">
+        <div class="flex flex-col items-center h-full pt-2 mb-12">
+            <h2 class="mb-4 text-3xl lg:text-4xl -tight font-bold text-primary-950">اخبار</h2>
+            <p class="font-light text-gray-500 sm:text-xl">آخرین اخبار جشنواره پایان نامه های کاربردی و کارفرمایی امیرکبیر</p>
+        </div> 
+        <div class="grid gap-8 lg:grid-cols-4">
+            {% for post in posts %}
+            <article class="p-2 bg-white rounded-lg border">       
+                <img class="bg-fixed text-center rounded-2xl" src={{ post.photo.url }} alt="" />
+                <div class="flex gap-x-4 pt-1 pb-0 text-sm">
+                    <time class="hover:bg-primary-200 p-2 rounded-full" datetime="2020-03-16">1 تیر 1403</time>
+                    <a class="hover:bg-primary-200 p-2 rounded-full" href="#">خبر</a>
+                </div>
+                <h2 class="mb-2 pt-4 font-semibold  text-gray-900 dark:text-white"><a href={{ post.get_absolute_url }}>{{ post.title }}</a></h2>
+                
+                <div class="">
+                    <div class="flex items-center space-x-4">
+                        <img class="w-7 h-7 rounded-full" src="{% static 'img/user.png' %}" alt="" />
+                        <span class="font-medium dark:text-white pr-2">
+                            مدیر سایت
+                        </span>
+                    </div>
+                    <a href={{ post.get_absolute_url }} class="inline-flex float-end items-center ml-4 px-3 py-2 text-sm font-medium text-center rounded-full btn-outline">
+                        <svg class="ml-2 w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                        بیشتر
+                    </a>
+                </div>
+            </article>
+            {% endfor %}               
+        </div>
+
+
+<div class="flex w-[300px] p-8 gap-x-8 items-center text-center justify-center">
+    <!-- Previous Button -->
+     {% if posts.has_previous %}
+    <a href="?page={{ posts.previous_page_number }}" class="flex items-center justify-center px-3 h-8 me-3 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+      <svg class="w-3.5 h-3.5 me-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5H1m0 0 4 4M1 5l4-4"/>
+      </svg>
+      قبلی
+    </a>
+    {% endif %}
+    {% if posts.has_next %}
+    <a href="?page={{ posts.next_page_number }}" class="flex items-center justify-center px-3 h-8 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+        بعدی
+        <svg class="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+        </svg>
+      </a>
+    {% endif %}
+  </div>
+  
+    </div>
+  </section>

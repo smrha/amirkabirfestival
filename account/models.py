@@ -8,48 +8,52 @@ class Article(models.Model):
         UPLOADED = 'UPL'
         REVIEW = 'REV'
         ACCEPTED = 'ACC'
-    user =  models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_articles')
-    title = models.CharField(max_length=255)
+    user =  models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_articles', verbose_name='کاربر')
+    title = models.CharField(max_length=255, verbose_name='عنوان رساله')
     status = models.CharField(max_length=3,
                               choices=Status.choices,
-                              default=Status.UPLOADED)
-    education_group = models.CharField(max_length=64)
-    teacher = models.CharField(max_length=120)
-    teacher_mobile = models.CharField(max_length=11)
-    teacher_email = models.CharField(max_length=120)
-    adviser = models.CharField(max_length=120)
-    adviser_mobile = models.CharField(max_length=11)
-    adviser_email = models.CharField(max_length=120)
-    defense_date = jmodels.jDateField(blank=True, null=True)
-    article_score = models.FloatField()
+                              default=Status.UPLOADED, verbose_name='وضعیت')
+    education_group = models.CharField(max_length=64, verbose_name='گروه آموزشی')
+    teacher = models.CharField(max_length=120, verbose_name='استاد')
+    teacher_mobile = models.CharField(max_length=11, verbose_name='موبایل استاد')
+    teacher_email = models.CharField(max_length=120, verbose_name='ایمیل استاد')
+    adviser = models.CharField(max_length=120, verbose_name='راهنما')
+    adviser_mobile = models.CharField(max_length=11, verbose_name='موبایل راهنما')
+    adviser_email = models.CharField(max_length=120, verbose_name='ایمیل راهنما')
+    defense_date = jmodels.jDateField(blank=True, null=True, verbose_name='تاریخ دفاع')
+    article_score = models.FloatField(verbose_name='نمره مقاله')
     # type = models.CharField(max_length=32)
-    Requester = models.CharField(max_length=120)
-    Requester_loc = models.CharField(max_length=120)
-    summary = models.TextField()
-    article_file = models.FileField(upload_to='articles/%Y/%m/%d/', default='articles/default.pdf')
-    other = models.FileField(upload_to='articles/%Y/%m/%d/', default='articles/default.pdf')
-    accept = models.FileField(upload_to='articles/%Y/%m/%d/', default='articles/default.pdf')
+    Requester = models.CharField(max_length=120, verbose_name='درخواست دهنده')
+    Requester_loc = models.CharField(max_length=120, verbose_name='آدرس درخواست دهنده')
+    summary = models.TextField(verbose_name='چکیده')
+    article_file = models.FileField(upload_to='articles/%Y/%m/%d/', default='articles/default.pdf', verbose_name='فایل مقاله')
+    other = models.FileField(upload_to='articles/%Y/%m/%d/', default='articles/default.pdf', verbose_name='دیگر')
+    accept = models.FileField(upload_to='articles/%Y/%m/%d/', default='articles/default.pdf', verbose_name='تاییدیه')
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
     class Meta:
         ordering = ['-created']
+        verbose_name = 'رساله'
+        verbose_name_plural = ' رساله ها'
         
     def __str__(self):
         return self.title
 
 class Education(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    university = models.CharField(max_length=120, blank=True)
-    field_study = models.CharField(max_length=120, blank=True)
-    degree = models.CharField(max_length=120)
-    score = models.FloatField(default=0)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, verbose_name='کاربر')
+    university = models.CharField(max_length=120, blank=True, verbose_name='دانشگاه')
+    field_study = models.CharField(max_length=120, blank=True, verbose_name='رشته تحصیلی')
+    degree = models.CharField(max_length=120, verbose_name='مقطع تحصیلی')
+    score = models.FloatField(default=0, verbose_name='معدل')
 
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
     class Meta:
         ordering = ['-created']
+        verbose_name = 'سابقه تحصیلی'
+        verbose_name_plural = 'سوابق تحصیلی'
         
     def __str__(self):
         return f'{self.user.first_name} {self.user.last_name}'
@@ -57,18 +61,20 @@ class Education(models.Model):
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    father_name = models.CharField(max_length=120)
-    national_id = models.CharField(max_length=10)
-    mobile_number = models.CharField(max_length=11)
-    date_of_birth = jmodels.jDateField(blank=True, null=True)
-    city_of_birth = models.CharField(max_length=120)
-    photo = models.ImageField(upload_to='photos/%Y/%m/%d/', default='photos/default.png')
+    father_name = models.CharField(max_length=120, verbose_name='نام پدر')
+    national_id = models.CharField(max_length=10, verbose_name='کد ملی')
+    mobile_number = models.CharField(max_length=11, verbose_name='موبایل')
+    date_of_birth = jmodels.jDateField(blank=True, null=True, verbose_name='تاریخ تولد')
+    city_of_birth = models.CharField(max_length=120, verbose_name='محل تولد')
+    photo = models.ImageField(upload_to='photos/%Y/%m/%d/', default='photos/default.png', verbose_name='عکس')
 
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
     class Meta:
         ordering = ['-created']
+        verbose_name = 'پروفایل'
+        verbose_name_plural = 'پروفابل کاربران'
         
     def __str__(self):
         return self.user.first_name
@@ -86,6 +92,8 @@ class Ticket(models.Model):
 
     class Meta:
         ordering = ['-created']
+        verbose_name = 'تیکت'
+        verbose_name_plural = 'تیکت ها'
 
     def __str__(self):
         return self.title

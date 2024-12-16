@@ -98,7 +98,7 @@ def main(request):
         result = paginator.page(paginator.num_pages)
 
     banner = posts.filter(category="IM")[:4]
-    return render(request, 'blog/base.html', {'posts': result, 'banner': banner})
+    return render(request, 'blog/main.html', {'posts': result, 'banner': banner})
 
 # Add a ticket view
 def ticket_add(request):

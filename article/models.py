@@ -31,6 +31,8 @@ class Post(models.Model):
         indexes = [
             models.Index(fields=['-publish']),
         ]
+        verbose_name = 'خبر'
+        verbose_name_plural = 'اخبار'
 
     def __str__(self):
         return self.title
