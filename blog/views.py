@@ -1,6 +1,24 @@
 from django.shortcuts import render, get_object_or_404
+from django.views import View
 from django.views.generic import ListView
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from .models import Post
+
+class HomeView(View):
+    def get(self, request):
+        posts = Post.published.all().order_by('-publish')
+        paginator = Paginator(posts, 8)
+        page = request.GET.get('page', 1)
+    
+        try:
+            result = paginator.page(page)
+        except PageNotAnInteger:
+            result = paginator.page(1)
+        except EmptyPage:
+            result = paginator.page(paginator.num_pages)
+
+        banner = posts.filter(category="IM")[:4]
+        return render(request, 'blog/home.html', {'posts': result, 'banner': banner})
 
 
 def gallery_first(request):

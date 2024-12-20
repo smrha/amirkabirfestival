@@ -1,0 +1,183 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<section class="py-12 xl:pt-12 xl:pb-0">
+    <div class="container bg-white shadow-custom1 rounded-[10px] mx-auto h-full py-4 px-4 lg:py-16 lg:px-6">
+        <div class=" px-4 sm:px-6 lg:px-8 mx-auto">
+            <!-- Invoice -->
+            <div class="max-w-[85rem] px-4 sm:px-6 lg:px-8 mx-auto my-4 sm:my-10">
+                <!-- Grid -->
+                <div class="mb-5 pb-5 flex justify-between items-center border-b border-gray-200">
+                    <div>
+                        <h2 class="text-2xl font-semibold text-gray-800">رساله</h2>
+                    </div>
+                </div>
+                <!-- End Grid -->
+            
+                <!-- Grid -->
+                <div class="grid lg:grid-cols-2 gap-3 border-b border-gray-200">
+                    <div>
+                        <div class="grid space-y-3">
+                            <dl class="flex flex-col sm:flex-row gap-x-3">
+                                <dt class="min-w-36 max-w-[200px] text-primary-900 text-xl">
+                                عنوان رساله:
+                                </dt>
+                                <dd class="text-gray-800 text-base">
+                                    {{ article.title }}
+                                </dd>
+                            </dl>
+                            <dl class="flex flex-col sm:flex-row gap-x-3">
+                                <dt class="min-w-36 max-w-[200px] text-primary-900 text-xl">
+                                ارائه دهنده:
+                                </dt>
+                                <dd class="text-gray-800 text-base">
+                                    {{ article.user.first_name }} {{ article.user.last_name }}
+                                </dd>
+                            </dl>
+                            <dl class="flex flex-col sm:flex-row gap-x-3 text-xl">
+                                <dt class="min-w-36 max-w-[200px] text-primary-900">
+                                گروه آموزشی:
+                                </dt>
+                                <dd class="text-gray-800 text-base">
+                                    {{ article.education_group }}
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>            
+                    <div>
+                        <div class="grid space-y-3">               
+                            <dl class="flex flex-col sm:flex-row gap-x-3 text-xl">
+                                <dt class="min-w-36 max-w-[200px] text-primary-900">
+                                    رشته تحصیلی:
+                                </dt>
+                                <dd class="text-gray-800 text-base">
+                                    {{ article.user.education.field_study }}
+                                </dd>
+                            </dl>
+                            <dl class="flex flex-col sm:flex-row gap-x-3 text-xl">
+                                <dt class="min-w-36 max-w-[200px] text-primary-900">
+                                    دانشگاه:
+                                </dt>
+                                <dd class="text-gray-800 text-base">
+                                    {{ article.user.education.university }}
+                                </dd>
+                            </dl>
+                            <dl class="flex flex-col sm:flex-row gap-x-3 text-xl">
+                                <dt class="min-w-36 max-w-[200px] text-primary-900">
+                                    تاریخ دفاع:
+                                </dt>
+                                <dd class="text-gray-800 text-base">
+                                    {{ article.defense_date }}
+                                </dd>
+                            </dl>
+                            <dl class="flex flex-col sm:flex-row gap-x-3 text-xl">
+                                <dt class="min-w-36 max-w-[200px] text-primary-900">
+                                    نمره رساله:
+                                </dt>
+                                <dd class="text-gray-800 text-base">
+                                    {{ article.article_score }}
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Grid -->
+
+                <!-- Grid -->
+                <div class="mb-5 pb-5 flex justify-between items-center border-b border-gray-200">
+                    <div>
+                        <h2 class="text-2xl pt-8 font-semibold text-gray-800 border-b border-gray-200 mb-5 pb-5">چکیده</h2>
+                        <p class="text-gray-800">{{ article.summary|safe }}</p>
+                    </div>
+                </div>
+
+                <!-- Grid -->
+                <div class="grid lg:grid-cols-2 gap-3 border-b border-gray-200">
+                    <div>
+                        <div class="grid space-y-3">
+                            <dl class="flex flex-col sm:flex-row gap-x-3">
+                                <dt class="min-w-36 max-w-[200px] text-primary-900 text-xl">
+                                فایل رساله:
+                                </dt>
+                                <dd class="text-gray-800 text-base">
+                                    <a href={{ article.article_file.url }}>نمایش فایل</a>
+                                </dd>
+                            </dl>
+                            <dl class="flex flex-col sm:flex-row gap-x-3">
+                                <dt class="min-w-36 max-w-[200px] text-primary-900 text-xl">
+                                    تاییدیه:
+                                </dt>
+                                <dd class="text-gray-800 text-base">
+                                    <a href={{ article.accept.url }}>نمایش فایل</a>
+                                </dd>
+                            </dl>
+                            <dl class="flex flex-col sm:flex-row gap-x-3">
+                                <dt class="min-w-36 max-w-[200px] text-primary-900 text-xl">
+                                سایر مستندات:
+                                </dt>
+                                <dd class="text-gray-800 text-base">
+                                    <a href={{ article.other.url }}>نمایش فایل</a>
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>       
+                </div>
+                <!-- End Grid -->
+            
+                <!-- Table -->
+                <div class="mt-6 border border-gray-200 p-4 rounded-lg space-y-4">
+                    <div class="hidden sm:grid sm:grid-cols-5">
+                        <div class="sm:col-span-2 text-xs font-medium text-gray-500 uppercase">استاد راهنما</div>
+                        <div class="text-start text-xs font-medium text-gray-500 uppercase">شماره تماس</div>
+                        <div class="text-start text-xs font-medium text-gray-500 uppercase">آدرس ایمیل</div>
+                    </div>
+            
+                    <div class="hidden sm:block border-b border-gray-200"></div>
+            
+                    <div class="grid grid-cols-3 sm:grid-cols-5 gap-2">
+                        <div class="col-span-full sm:col-span-2">
+                            <p class="font-medium text-gray-800">{{ article.teacher }}</p>
+                        </div>
+                        <div>
+                            <p class="text-gray-800">{{ article.teacher_mobile }}</p>
+                        </div>
+                        <div>
+                            <p class="text-gray-800">{{ article.teacher_email }}</p>
+                        </div>
+                    </div>
+                    <div class="sm:hidden border-b border-gray-200"></div>
+                </div>
+                <!-- End Table -->
+                 <!-- Table -->
+                <div class="mt-6 border border-gray-200 p-4 rounded-lg space-y-4">
+                    <div class="hidden sm:grid sm:grid-cols-5">
+                        <div class="sm:col-span-2 text-xs font-medium text-gray-500 uppercase">استاد مشاور</div>
+                        <div class="text-start text-xs font-medium text-gray-500 uppercase">شماره تماس</div>
+                        <div class="text-start text-xs font-medium text-gray-500 uppercase">آدرس ایمیل</div>
+                    </div>
+            
+                    <div class="hidden sm:block border-b border-gray-200"></div>
+            
+                    <div class="grid grid-cols-3 sm:grid-cols-5 gap-2">
+                        <div class="col-span-full sm:col-span-2">
+                            <p class="font-medium text-gray-800">{{ article.adviser }}</p>
+                        </div>
+                        <div>
+                            <p class="text-gray-800">{{ article.adviser_mobile }}</p>
+                        </div>
+                        <div>
+                            <p class="text-gray-800">{{ article.adviser_email }}</p>
+                        </div>
+                    </div>
+                    <div class="sm:hidden border-b border-gray-200"></div>
+                </div>
+                <!-- End Table -->
+            </div>
+            <!-- End Invoice -->
+        </div>
+    </div>
+</section>
+
+{% endblock content %}>

@@ -54,51 +54,26 @@ class ArticleUpdateView(View):
             return redirect("account:article_list")
         else:
             messages.error(request, ' خطا در بروزرسانی رساله.')
-        return render(request, 'account/article_edit.html', {'form': form, 'article': article})        
-
-# def article_edit(request, id):
-#     article = Article.objects.get(pk=id)
-#     form = ArticleForm(request.POST or None, request.FILES or None, instance=article)
-#     if request.method == 'POST':
-#         if form.is_valid():
-#             form.save()
-#             messages.success(request, 'بروزرسانی انجام شد.')
-#             return redirect("account:article_list")
-#         else:
-#             messages.error(request, 'خطا در بروزرسانی')
-#     return render(request, 'account/article_edit.html', {'form': form, 'article': article})
-
-# Article add item view
-# def article_add(request):
-#     if request.method == 'POST':
-#         form = ArticleForm(request.POST, request.FILES)
-#         if form.is_valid():
-#             new_article = form.save(commit=False)
-#             new_article.user = request.user
-#             new_article.save()
-#             messages.success(request, 'بروزرسانی انجام شد.')
-#             return redirect('account:article_list')
-#         else:
-#             messages.error(request, 'خطا در بروزرسانی')
-#     else:
-#         form = ArticleForm()
-#     return render(request, 'account/article_add.html', {'form': form})
-
-
-def main(request):
-    posts = Post.published.all().order_by('-publish')
-    paginator = Paginator(posts, 8)
-    page = request.GET.get('page', 1)
+        return render(request, 'account/article_edit.html', {'form': form, 'article': article})
     
-    try:
-        result = paginator.page(page)
-    except PageNotAnInteger:
-        result = paginator.page(1)
-    except EmptyPage:
-        result = paginator.page(paginator.num_pages)
 
-    banner = posts.filter(category="IM")[:4]
-    return render(request, 'blog/main.html', {'posts': result, 'banner': banner})
+class ArticleListView(View):
+    def get(self, request):
+        articles = Article.objects.all()
+        return render(request, 'account/article_list.html', {'articles': articles}) 
+    
+
+class ArticleShowView(View):
+    def get(self, request, id):
+        article = Article.objects.get(id=id)
+        return render(request, 'account/article.html', {'article': article}) 
+
+
+# Show list of user articles
+class UserArticleListView(View):
+    def get(self, request):
+        articles = Article.objects.filter(user=request.user)
+        return render(request, 'account/user_article_list.html', {'articles': articles}) 
 
 # Add a ticket view
 def ticket_add(request):
@@ -113,11 +88,7 @@ def ticket_add(request):
             messages.error(request, 'خطا در ارسال تیکت')
     else:
         form = TicketForm()
-    return render(request, 'account/ticket_add.html', {'form': form})
-
-def article_list(request):
-    articles = Article.objects.filter(user=request.user)
-    return render(request, 'account/article_list.html', {'articles': articles})
+    return render(request, 'account/ticket_add.html', {'form': form}) 
 
 
 
@@ -195,6 +166,10 @@ def user_login(request):
     else:
         form = LoginForm()
     return render(request, 'account/login.html', {'form': form})
+
+class DashboardView(View):
+    def get(self, request):
+        return render(request, 'account/home.html')
 
 def home(request):
     return render(request, 'account/home.html')
