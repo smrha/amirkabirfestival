@@ -1,0 +1,30 @@
+{% load static %}
+<div class="lg:col-span-1 lg:w-full lg:h-full lg:bg-gradient-to-r lg:from-gray-50 lg:via-transparent lg:to-transparent">
+    <div class="sticky top-0 start-0 py-8 lg:ps-8">
+      <!-- Avatar Media -->
+      <div class="group flex items-center gap-x-3 border-b border-gray-200 pb-8 mb-8">
+        <h5 class="group-hover:text-gray-600 group-focus:text-gray-600 text-sm font-semibold text-gray-800">
+          آخرین اخبار
+        </h5>
+      </div>
+      <!-- End Avatar Media -->
+
+      <div class="space-y-6">
+        {% for obj in posts %}
+          <!-- News -->
+          <a class="group flex items-center gap-x-6 focus:outline-none" href="#">
+            <div class="grow">
+              <span class="text-sm font-bold text-gray-800 group-hover:text-blue-600 group-focus:text-blue-600">
+                {{ obj.title }}
+              </span>
+            </div>
+
+            <div class="shrink-0 relative rounded-lg overflow-hidden size-20">
+              <img class="size-full absolute top-0 start-0 object-cover rounded-lg" src="{{ obj.photo.url }}" alt="Blog Image">
+            </div>
+          </a>
+          <!-- End News -->
+        {% endfor %}
+      </div>
+    </div>
+  </div>

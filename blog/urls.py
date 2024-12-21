@@ -21,7 +21,7 @@ urlpatterns = [
     path('honar/', views.honar, name='honar'),
     path('introduction/', views.introduction, name='introduction'),
     path('foundation/', views.foundation, name='foundation'),
-    path('purpose/', views.purpose, name='purpose'),
+    path('purpose/', views.PurposeView.as_view(), name='purpose'),
     path('executive/', views.executive, name='executive'),
     path('news/', views.news, name='news'),
     path('<int:year>/<int:month>/<int:day>/<slug:post>/',

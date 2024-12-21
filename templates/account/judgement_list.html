@@ -53,7 +53,7 @@
                           {{ forloop.counter }}
                         </td>
                         <th scope="row" class="px-2 py-4 font-medium text-gray-900 ">
-                          <a href="{% url 'account:article_show' article.id %}" class="font-medium text-primary-600 dark:text-primary-500 hover:underline">
+                          <a href="{% url 'account:judgement_referee' article.id %}" class="font-medium text-primary-600 dark:text-primary-500 hover:underline">
                             {{ article.title|truncatechars:50 }}
                           </a>                          
                         </th>
@@ -73,7 +73,7 @@
                           {{ article.defense_date }}
                         </td>
                         <td class="px-2 py-4">
-                            <a href="{% url 'account:article_show' article.id %}" class="font-medium text-primary-600 dark:text-primary-500 hover:underline">ویرایش</a>
+                            <a href="{% url 'account:judgement_referee' article.id %}" class="font-medium text-primary-600 dark:text-primary-500 hover:underline">ویرایش</a>
                         </td>
                       </tr>
                       {% endfor %}

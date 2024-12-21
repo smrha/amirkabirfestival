@@ -6,8 +6,9 @@ from django.views import View
 from django.contrib.auth import authenticate, login, logout
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from .forms import LoginForm, UserEditForm, ProfileEditForm, CustomAuthenticationForm, \
-    CustomUserCreationForm, EducationEditForm, ArticleForm, TicketForm
-from .models import Profile, Education, Article
+    CustomUserCreationForm, EducationEditForm, ArticleForm, TicketForm, UploadToReviewForm, \
+    ChoiceRefereeForm
+from .models import Profile, Education, Article, judgement
 from blog.models import Post
 
 
@@ -59,14 +60,64 @@ class ArticleUpdateView(View):
 
 class ArticleListView(View):
     def get(self, request):
-        articles = Article.objects.all()
-        return render(request, 'account/article_list.html', {'articles': articles}) 
+        articles = Article.objects.all().filter(status=Article.Status.UPLOADED).order_by('-created')
+        paginator = Paginator(articles, 10)
+        page = request.GET.get('page', 1)
+    
+        try:
+            result = paginator.page(page)
+        except PageNotAnInteger:
+            result = paginator.page(1)
+        except EmptyPage:
+            result = paginator.page(paginator.num_pages)
+        
+        return render(request, 'account/article_list.html', {'articles': result }) 
+
     
 
 class ArticleShowView(View):
+    upload_form = UploadToReviewForm    
+
     def get(self, request, id):
+        form = self.upload_form()
         article = Article.objects.get(id=id)
-        return render(request, 'account/article.html', {'article': article}) 
+        # if article.status == Article.Status.values[0]:
+        return render(request, 'account/article.html', {'article': article, 'form': form})
+    
+    def post(self, request, id):
+        form = self.upload_form(request.POST)
+        article = Article.objects.get(id=id)
+        if form.is_valid():
+            if form.cleaned_data["accept"] == True:
+                article.status = Article.Status.REVIEW
+                article.save()         
+        return redirect('account:article_list')
+    
+
+class JudgementListView(View):
+
+    def get(self, request):
+        articles = Article.objects.all().filter(status=Article.Status.REVIEW).order_by('-created')
+        paginator = Paginator(articles, 10)
+        page = request.GET.get('page', 1)
+    
+        try:
+            result = paginator.page(page)
+        except PageNotAnInteger:
+            result = paginator.page(1)
+        except EmptyPage:
+            result = paginator.page(paginator.num_pages)
+        
+        return render(request, 'account/judgement_list.html', {'articles': result }) 
+
+
+class JudgementRefereeView(View):
+    form_class = ChoiceRefereeForm
+
+    def get(self, request, id):
+        form = self.form_class()
+        article = Article.objects.get(id=id)
+        return render(request, 'account/referee.html', {'article': article, 'form': form})
 
 
 # Show list of user articles

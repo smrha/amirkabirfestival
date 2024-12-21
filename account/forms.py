@@ -29,6 +29,28 @@ TYPE_CHOICES = (
     ('کارفرمایی', 'کارفرمایی'),
 )
 
+REFEREES =( 
+    ("1", "داور گروه علوم پزشکی"), 
+    ("2", "داور گروه علوم انسانی"), 
+    ("3", "داور گروه هنر"), 
+) 
+
+
+class UploadToReviewForm(forms.Form):
+    accept = forms.BooleanField(
+        label="این رساله مورد تایید بوده و جهت بررسی به دبیر جشنواره ارسال می گردد.",
+        widget=forms.CheckboxInput(
+            attrs={"class": "w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800"})
+        )
+
+
+class ChoiceRefereeForm(forms.Form):
+    referee = forms.CharField(
+        label='',
+        widget=forms.Select(
+            choices=REFEREES,
+            attrs={"class": "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"})
+    )    
 
 class TicketForm(forms.ModelForm):
     title = forms.CharField(

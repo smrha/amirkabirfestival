@@ -7,6 +7,7 @@ class Article(models.Model):
     class Status(models.TextChoices):
         UPLOADED = 'UPL'
         REVIEW = 'REV'
+        EVALUATION = 'EVA'
         ACCEPTED = 'ACC'
     user =  models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_articles', verbose_name='کاربر')
     title = models.CharField(max_length=255, verbose_name='عنوان رساله')
@@ -22,7 +23,6 @@ class Article(models.Model):
     adviser_email = models.CharField(max_length=120, verbose_name='ایمیل راهنما')
     defense_date = jmodels.jDateField(blank=True, null=True, verbose_name='تاریخ دفاع')
     article_score = models.FloatField(verbose_name='نمره مقاله')
-    # type = models.CharField(max_length=32)
     Requester = models.CharField(max_length=120, verbose_name='درخواست دهنده')
     Requester_loc = models.CharField(max_length=120, verbose_name='آدرس درخواست دهنده')
     summary = models.TextField(verbose_name='چکیده')
@@ -97,3 +97,18 @@ class Ticket(models.Model):
 
     def __str__(self):
         return self.title
+    
+
+class judgement(models.Model):
+    referee = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='داور')
+    article = models.ForeignKey(Article, on_delete=models.CASCADE, verbose_name='رساله')
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['-created']
+        verbose_name = 'داوری'
+        verbose_name_plural = 'داوری ها'
+
+    def __str__(self):
+        return f"{ self.article.id } - { self.referee.username }"

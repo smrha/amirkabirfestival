@@ -17,4 +17,7 @@ urlpatterns = [
     path('articles/', views.UserArticleListView.as_view(), name="user_articles"),
     path('article/edit/<int:id>', views.ArticleUpdateView.as_view(), name="article_edit"),
     path('ticket/add/', views.ticket_add, name='ticket_add'),
+
+    path('judgement/list/', views.JudgementListView.as_view(), name="judgement_list"),
+    path('judgement/referee/<int:id>/', views.JudgementRefereeView.as_view(), name="judgement_referee"),
 ]

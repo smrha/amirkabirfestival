@@ -63,8 +63,11 @@ def introduction(request):
 def executive(request):
     return render(request, 'blog/post/executive.html')
 
-def purpose(request):
-    return render(request, 'blog/post/purpose.html')
+
+class PurposeView(View):
+    def get(self, request):
+        posts = Post.published.all()[:5]
+        return render(request, 'blog/post/purpose.html', {'posts': posts})
 
 def foundation(request):
     return render(request, 'blog/post/foundation.html')
@@ -73,6 +76,7 @@ def news(request):
     return render(request, 'blog/post/news.html')
 
 def post_detail(request, year, month, day, post):
+    posts = Post.published.all()[:5]
     post = get_object_or_404(Post,
                              status=Post.Status.PUBLISHED,
                              slug=post,
@@ -83,7 +87,7 @@ def post_detail(request, year, month, day, post):
     post.save()
     return render(request,
                   'blog/post/news.html',
-                  {'post': post})
+                  {'post': post, 'posts': posts})
 
 class PostListView(ListView):
     """
