@@ -10,7 +10,7 @@
             <article class="p-2 bg-white rounded-lg border">       
                 <img class="bg-fixed text-center rounded-2xl" src={{ post.photo.url }} alt="" />
                 <div class="flex gap-x-4 pt-1 pb-0 text-sm">
-                    <time class="hover:bg-primary-200 p-2 rounded-full" datetime="2020-03-16">1 تیر 1403</time>
+                    <time class="hover:bg-primary-200 p-2 rounded-full" datetime="2020-03-16">{{ post.j_publish }}</time>
                     <a class="hover:bg-primary-200 p-2 rounded-full" href="#">خبر</a>
                 </div>
                 <h2 class="mb-2 pt-4 font-semibold  text-gray-900 dark:text-white"><a href={{ post.get_absolute_url }}>{{ post.title }}</a></h2>

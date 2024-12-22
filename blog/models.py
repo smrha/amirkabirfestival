@@ -3,6 +3,8 @@ from ckeditor.fields import RichTextField
 from django.utils import timezone
 from django.contrib.auth.models import User
 from django.urls import reverse
+from django_jalali.db import models as jmodels
+from extentions.utils import covert_to_jalali
 
 
 class PublishedManager(models.Manager):
@@ -53,6 +55,10 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+    
+    # show jalali publish date string
+    def j_publish(self):
+        return covert_to_jalali(self.publish)
 
     def get_absolute_url(self):
         return reverse('blog:post_detail',

@@ -72,8 +72,23 @@ class PurposeView(View):
 def foundation(request):
     return render(request, 'blog/post/foundation.html')
 
+class NewsListView(View):
+    def get(self, request):
+        posts = Post.published.all().order_by('-publish')
+        paginator = Paginator(posts, 12)
+        page = request.GET.get('page', 1)
+    
+        try:
+            result = paginator.page(page)
+        except PageNotAnInteger:
+            result = paginator.page(1)
+        except EmptyPage:
+            result = paginator.page(paginator.num_pages)
+        return render(request, 'blog/post/news_list.html', {'posts': result})
+
+
 def news(request):
-    return render(request, 'blog/post/news.html')
+    return render(request, 'blog/post/news_list.html')
 
 def post_detail(request, year, month, day, post):
     posts = Post.published.all()[:5]
@@ -86,7 +101,7 @@ def post_detail(request, year, month, day, post):
     post.views += 1
     post.save()
     return render(request,
-                  'blog/post/news.html',
+                  'blog/post/news_detail.html',
                   {'post': post, 'posts': posts})
 
 class PostListView(ListView):

@@ -3,6 +3,142 @@
 
 {% block content %}
 
+<section class="py-12 xl:pt-12 xl:pb-12">
+  <div class="container bg-white shadow-custom1 rounded-[10px] mx-auto h-full py-4 px-4 lg:py-16 lg:px-6">
+    <!-- Start Notification -->
+    {% if messages %}
+    {% for message in messages %}
+      {% if message.tags == "success" %}
+        <div id="toast-success" class="flex items-center w-full max-w-xs p-4 mb-4 text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800" role="alert">
+          <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-green-500 bg-green-100 rounded-lg dark:bg-green-800 dark:text-green-200">
+              <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
+              </svg>
+              <span class="sr-only">Check icon</span>
+          </div>
+          <div class="ms-3 text-sm font-normal">{{ message|safe }}</div>
+          <button type="button" class="ms-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex items-center justify-center h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700" data-dismiss-target="#toast-success" aria-label="Close">
+              <span class="sr-only">بستن</span>
+              <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+              </svg>
+          </button>
+        </div>
+      {% endif %}
+      {% if message.tags == "error" %}
+        <div id="toast-danger" class="flex items-center w-full max-w-xs p-4 mb-4 text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800" role="alert">
+          <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-red-500 bg-red-100 rounded-lg dark:bg-red-800 dark:text-red-200">
+              <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 11.793a1 1 0 1 1-1.414 1.414L10 11.414l-2.293 2.293a1 1 0 0 1-1.414-1.414L8.586 10 6.293 7.707a1 1 0 0 1 1.414-1.414L10 8.586l2.293-2.293a1 1 0 0 1 1.414 1.414L11.414 10l2.293 2.293Z"/>
+              </svg>
+              <span class="sr-only">Error icon</span>
+          </div>
+          <div class="ms-3 text-sm font-normal">{{ message|safe }}</div>
+          <button type="button" class="ms-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex items-center justify-center h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700" data-dismiss-target="#toast-danger" aria-label="Close">
+              <span class="sr-only">بستن</span>
+              <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+              </svg>
+          </button>
+        </div>
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+  <!-- End Notification -->
+  <div class="max-w-2xl px-4 py-8 mx-auto lg:py-16">
+    <h2 class="mb-4 text-xl font-bold text-gray-900 dark:text-white">ارسال پایان نامه</h2>
+    <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
+        <div class="sm:col-span-2">
+          <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ form.title.label }}</label>
+          {{ form.title }}
+        </div>
+        <div class="sm:col-span-2">
+          <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ form.summary.label }}</label>
+          {{ form.summary }}
+        </div>
+        <div class="w-full">
+          <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ form.education_group.label }}</label>
+          {{ form.education_group }}
+        </div>
+        <div class="w-full">
+          <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ form.defense_date.label }}</label>
+          {{ form.defense_date }}
+        </div>
+        <div class="sm:col-span-2">
+          <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ form.teacher.label }}</label>
+          {{ form.teacher }}
+        </div>
+        <div class="w-full">
+          <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ form.teacher_mobile.label }}</label>
+          {{ form.teacher_mobile }}
+        </div>
+        <div class="w-full">
+          <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ form.teacher_email.label }}</label>
+          {{ form.teacher_email }}
+        </div>
+        <div class="w-full">
+          <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ form.article_score.label }}</label>
+          {{ form.article_score }}
+        </div>
+        <div class="w-full">
+          <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ form.type.label }}</label>
+          {{ form.type }}
+        </div>
+        <div class="sm:col-span-2">
+          <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ form.adviser.label }}</label>
+          {{ form.adviser }}
+        </div>
+        <div class="w-full">
+          <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ form.adviser_mobile.label }}</label>
+          {{ form.adviser_mobile }}
+        </div>
+        <div class="w-full">
+          <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ form.adviser_email.label }}</label>
+          {{ form.adviser_email }}
+        </div>
+        <div class="sm:col-span-2">
+          <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ form.Requester.label }}</label>
+          {{ form.Requester }}
+        </div>
+        <div class="sm:col-span-2">
+          <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ form.Requester_loc.label }}</label>
+          {{ form.Requester_loc }}
+        </div>
+        <div class="sm:col-span-2">
+          <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ form.article_file.label }}</label>
+          {{ form.article_file }}
+          {% if form.article_file %}
+            <p><a href={{ article.article_file.url }}>نمایش فایل</a></p>
+          {% endif %}
+        </div>
+        <div class="sm:col-span-2">
+          <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ form.other.label }}</label>
+          {{ form.other }}
+          {% if form.other %}
+            <p><a href={{ article.other.url }}>نمایش فایل</a></p>
+          {% endif %}
+        </div>
+        <div class="sm:col-span-2">
+          <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ form.accept.label }}</label>
+          {{ form.accept }}
+          {% if form.accept %}
+            <p><a href={{ article.accept.url }}>نمایش فایل</a></p>
+          {% endif %}
+        </div>
+
+      </div>
+        <div class="flex items-center space-x-4">
+            <button type="submit" class="text-white mt-6 bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                ویرایش
+            </button>
+        </div>
+    </form>
+</div>
+  </div>
+</section>
+
 <section class="bg-white py-8 antialiased dark:bg-gray-900 md:py-8">
     <div class="mx-auto max-w-screen-lg px-4 2xl:px-0">
       <nav class="mb-4 flex" aria-label="Breadcrumb">

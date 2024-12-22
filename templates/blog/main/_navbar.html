@@ -18,7 +18,7 @@
                 <div class="text-secondary">02632521124</div>
             </div>
             <!-- btn -->
-            <button href={% url 'account:login' %} class="btn btn-sm btn-outline w-[240px] lg:w-auto lg:mx-0">ورود / ثبت نام</button>
+            <a href={% url 'account:login' %} class="btn btn-sm btn-outline w-[240px] lg:w-auto lg:mx-0">ورود / ثبت نام</a>
             <!-- mobile nav -->
             <nav class="mnav bg-white fixed w-[300px] top-0 -left-[300px] h-screen shadow-2xl lg:hidden transition-all duration-300 z-20">
                 <!-- nav trigger btn -->
@@ -93,7 +93,7 @@
             </nav>
         </div>
         <!-- desktop nav -->
-        <nav class="bg-white absolute w-full left-0 -bottom-[86px] shadow-custom1 h-16 rounded-[10px] hidden lg:flex lg:items-center lg:justify-between lg:px-[50px]">
+        <nav class="bg-white absolute w-full left-0 -bottom-[86px] shadow-custom1 h-16 rounded-[10px] hidden z-50 lg:flex lg:items-center lg:justify-between lg:px-[50px]">
             <!-- list -->
             <div>
                 <ul class="flex gap-x-4">
@@ -159,7 +159,7 @@
                     </li>
                     <li>
                         <a 
-                        href="#"
+                        href="{% url 'blog:news_list' %}"
                         class="border-r pr-4 text-secondary hover:text-accent transition-all duration-300">
                         اخبار
                         </a>

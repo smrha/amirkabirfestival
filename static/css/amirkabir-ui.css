@@ -1548,11 +1548,6 @@ button {
   display: none;
 }
 
-.size-10 {
-  width: 2.5rem;
-  height: 2.5rem;
-}
-
 .size-12 {
   width: 3rem;
   height: 3rem;
@@ -1827,10 +1822,6 @@ button {
   table-layout: auto;
 }
 
-.table-fixed {
-  table-layout: fixed;
-}
-
 .origin-top-left {
   transform-origin: top left;
 }
@@ -1945,10 +1936,6 @@ button {
 
 .grid-cols-8 {
   grid-template-columns: repeat(8, minmax(0, 1fr));
-}
-
-.flex-row {
-  flex-direction: row;
 }
 
 .flex-col {
@@ -2303,11 +2290,6 @@ button {
 .border-gray-300 {
   --tw-border-opacity: 1;
   border-color: rgb(209 213 219 / var(--tw-border-opacity));
-}
-
-.border-primary-300 {
-  --tw-border-opacity: 1;
-  border-color: rgb(103 232 249 / var(--tw-border-opacity));
 }
 
 .border-primary-50 {
@@ -3269,16 +3251,6 @@ faq__item.open .faq__answer {
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
-.even\:bg-primary-200:nth-child(even) {
-  --tw-bg-opacity: 1;
-  background-color: rgb(165 243 252 / var(--tw-bg-opacity));
-}
-
-.even\:bg-primary-50:nth-child(even) {
-  --tw-bg-opacity: 1;
-  background-color: rgb(236 254 255 / var(--tw-bg-opacity));
-}
-
 .even\:bg-primary-100:nth-child(even) {
   --tw-bg-opacity: 1;
   background-color: rgb(207 250 254 / var(--tw-bg-opacity));
@@ -3322,11 +3294,6 @@ faq__item.open .faq__answer {
 .hover\:bg-gray-50:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(249 250 251 / var(--tw-bg-opacity));
-}
-
-.hover\:bg-primary-100:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(207 250 254 / var(--tw-bg-opacity));
 }
 
 .hover\:bg-primary-200:hover {
@@ -3387,11 +3354,6 @@ faq__item.open .faq__answer {
 .hover\:text-primary-600:hover {
   --tw-text-opacity: 1;
   color: rgb(8 145 178 / var(--tw-text-opacity));
-}
-
-.hover\:text-primary-700:hover {
-  --tw-text-opacity: 1;
-  color: rgb(14 116 144 / var(--tw-text-opacity));
 }
 
 .hover\:text-white:hover {
@@ -4486,6 +4448,10 @@ faq__item.open .faq__answer {
 
   .xl\:pt-12 {
     padding-top: 3rem;
+  }
+
+  .xl\:pb-12 {
+    padding-bottom: 3rem;
   }
 
   .xl\:text-left {

@@ -28,7 +28,7 @@ INSTALLED_APPS = [
     'jalali_date',
     'django_jalali',
     'ckeditor',
-    'blog',
+    'blog.apps.BlogConfig',
     'account'
 ]
 
@@ -123,7 +123,7 @@ STATICFILES_DIRS = [
 
 LOGIN_URL = 'login'
 LOGOUT_URL = 'logout'
-LOGIN_REDIRECT_URL = '/account/home'
+LOGIN_REDIRECT_URL = '/account/'
 
 MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / 'media'

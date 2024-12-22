@@ -22,7 +22,7 @@
                 <div class="text-secondary">02632521124</div>
             </div>
             <!-- btn -->
-            <button href={% url 'account:login' %} class="btn btn-sm btn-outline w-[240px] lg:w-auto lg:mx-0">ورود / ثبت نام</button>
+            <a href={% url 'account:logout' %} class="btn btn-sm btn-outline w-[240px] lg:w-auto lg:mx-0">خروج</a>
             <!-- mobile nav -->
             <nav class="mnav bg-white fixed w-[300px] top-0 -left-[300px] h-screen shadow-2xl lg:hidden transition-all duration-300 z-20">
                 <!-- nav trigger btn -->
@@ -103,83 +103,30 @@
                 <ul class="flex gap-x-4">
                     <li>
                         <a 
-                        href={% url 'main' %}
+                        href={% url 'account:dashboard' %}
                         class="text-secondary hover:text-accent transition-all duration-300">
                         خانه
                         </a>
                     </li>
                     <li>
-                        <button id="dropdownNavbarLink" data-dropdown-toggle="dropdownNavbar" class="flex items-center justify-between w-full py-2 px-3 text-secondary  hover:text-accent md:hover:bg-transparent md:border-0 md:hover:text-accent-secondary md:p-0 md:w-auto">
-                            جشنواره          
-                        </button>
-                        <!-- Dropdown menu -->
-                        <div id="dropdownNavbar" class="z-10 hidden font-normal bg-white divide-y divide-gray-100 w-44 shadow-custom1">
-                            <ul class="py-2 text-sm text-secondary aria-labelledby="dropdownLargeButton">
-                              <li>
-                                <a href="{% url "blog:purpose" %}" class="block px-4 py-2 hover:text-accent transition-all duration-300">اهداف</a>
-                              </li>
-                              <li>
-                                <a href="{% url "blog:executive" %}" class="block px-4 py-2 hover:text-accent transition-all duration-300">برنامه اجرایی</a>
-                              </li>
-                              <li>
-                                <a href="{% url "blog:foundation" %}" class="block px-4 py-2 hover:text-accent transition-all duration-300">محورهای جشنواره</a>
-                              </li>
-                              <li>
-                                <a href="{% url "blog:purpose" %}" class="block px-4 py-2 hover:text-accent transition-all duration-300">معرفی</a>
-                              </li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li>
-                        <button id="dropdownNavbarLink1" data-dropdown-toggle="dropdownNavbar1" class="flex items-center justify-between w-full py-2 px-3 text-secondary  hover:text-accent md:hover:bg-transparent md:border-0 md:hover:text-accent-secondary md:p-0 md:w-auto">
-                            گروه های آموزشی          
-                        </button>
-                        <!-- Dropdown menu -->
-                        <div id="dropdownNavbar1" class="z-20 hidden font-normal bg-white divide-y divide-gray-100 w-44 shadow-custom1">
-                            <ul class="py-2 text-sm text-secondary aria-labelledby="dropdownLargeButton">
-                                <li>
-                                    <a href="{% url "blog:olom_ensani" %}" class="block px-4 py-2 hover:text-accent transition-all duration-300">علوم انسانی و زبان های خارجه</a>
-                                  </li>
-                                  <li>
-                                    <a href="{% url "blog:olom_payeh" %}" class="block px-4 py-2 hover:text-accent transition-all duration-300">علوم پایه</a>
-                                  </li>
-                                  <li>
-                                    <a href="{% url "blog:fani" %}" class="block px-4 py-2 hover:text-accent transition-all duration-300">فنی و مهندسی</a>
-                                  </li>
-                                  <li>
-                                    <a href="{% url "blog:keshavarzi" %}" class="block px-4 py-2 hover:text-accent transition-all duration-300">کشاورزی، منابع طبیعی و محیط زیست</a>
-                                  </li>
-                                  <li>
-                                    <a href="{% url "blog:pezeshki" %}" class="block px-4 py-2 hover:text-accent transition-all duration-300"> علوم پزشکی </a>
-                                  </li>
-                                  <li>
-                                    <a href="{% url "blog:dampezeshki" %}" class="block px-4 py-2 hover:text-accent transition-all duration-300">دامپزشکی و علوم دامی </a>
-                                  </li>
-                                <li>
-                                <a href="{% url "blog:honar" %}" class="block px-4 py-2 hover:text-accent transition-all duration-300">هنر و معماری </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li>
                         <a 
-                        href="#"
+                        href="{% url 'account:edit' %}"
                         class="border-r pr-4 text-secondary hover:text-accent transition-all duration-300">
-                        اخبار
+                        سوابق فردی
                         </a>
                     </li>
                     <li>
                         <a 
-                        href="#"
+                        href="{% url 'account:education' %}"
                         class="border-r pr-4 text-secondary hover:text-accent transition-all duration-300">
-                        حامیان
+                        سوابق تحصیلی
                         </a>
                     </li>
                     <li>
                         <a 
-                        href="#"
+                        href="{% url 'account:user_articles' %}"
                         class="border-r pr-4 text-secondary hover:text-accent transition-all duration-300">
-                        دبیرخانه جشنواره
+                        رساله ها
                         </a>
                     </li>
                     </ul>
