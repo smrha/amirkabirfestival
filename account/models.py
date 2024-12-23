@@ -99,7 +99,7 @@ class Ticket(models.Model):
         return self.title
     
 
-class judgement(models.Model):
+class Judgement(models.Model):
     referee = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='داور')
     article = models.ForeignKey(Article, on_delete=models.CASCADE, verbose_name='رساله')
     created = models.DateTimeField(auto_now_add=True)

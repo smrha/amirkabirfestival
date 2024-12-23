@@ -1,7 +1,10 @@
 from django.contrib import admin
 
-from .models import Profile, Education, Article, Ticket
+from .models import Profile, Education, Article, Ticket, Judgement
 
+@admin.register(Judgement)
+class JudgementAdmin(admin.ModelAdmin):
+    pass
 
 @admin.register(Article)
 class ArticleAdmin(admin.ModelAdmin):

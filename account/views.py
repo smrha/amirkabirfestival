@@ -1,6 +1,6 @@
 from django.contrib.auth.views import LoginView
 from django.contrib import messages
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseForbidden
 from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib.auth import authenticate, login, logout
@@ -8,8 +8,23 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from .forms import LoginForm, UserEditForm, ProfileEditForm, CustomAuthenticationForm, \
     CustomUserCreationForm, EducationEditForm, ArticleForm, TicketForm, UploadToReviewForm, \
     ChoiceRefereeForm
-from .models import Profile, Education, Article, judgement
-from blog.models import Post
+from django.contrib.auth.mixins import LoginRequiredMixin
+from .models import Profile, Education, Article, Judgement
+from django.contrib.auth.models import User
+import unicodecsv as csv
+from io import BytesIO
+
+def export_to_excel(request):
+    articles = Article.objects.all()
+    f = BytesIO()
+    responese = HttpResponse('text/csv')
+    responese['Content-Disposition'] = 'attachment; filename=articles_export.csv'
+    writer = csv.writer(responese,f, encoding='utf-8')
+    writer.writerow(['user', 'title', 'education_group', 'teacher'])
+    article_fileds = articles.values_list('user', 'title', 'education_group', 'teacher')
+    for article in article_fileds:
+        writer.writerow(article)
+    return responese
 
 
 class CustomLoginView(LoginView):
@@ -21,6 +36,8 @@ class ArticleCreateView(View):
     template_name = "account/article_create.html"
 
     def get(self, request):
+        if not request.user.is_authenticated:
+            return HttpResponseForbidden()
         form = self.form_class()
         return render(request, self.template_name, {'form': form})
     
@@ -42,6 +59,8 @@ class ArticleCreateView(View):
 class ArticleUpdateView(View):
 
     def get(self, request, id):
+        if not request.user.is_authenticated:
+            return HttpResponseForbidden()
         article = Article.objects.get(pk=id)
         form = ArticleForm(request.POST or None, request.FILES or None, instance=article)
         return render(request, 'account/article_edit.html', {'form': form, 'article': article})
@@ -60,6 +79,8 @@ class ArticleUpdateView(View):
 
 class ArticleListView(View):
     def get(self, request):
+        if not request.user.is_authenticated or not request.user.is_staff:
+            return HttpResponseForbidden()
         articles = Article.objects.all().filter(status=Article.Status.UPLOADED).order_by('-created')
         paginator = Paginator(articles, 10)
         page = request.GET.get('page', 1)
@@ -79,6 +100,8 @@ class ArticleShowView(View):
     upload_form = UploadToReviewForm    
 
     def get(self, request, id):
+        if not request.user.is_authenticated or not request.user.is_staff:
+            return HttpResponseForbidden()
         form = self.upload_form()
         article = Article.objects.get(id=id)
         # if article.status == Article.Status.values[0]:
@@ -97,6 +120,8 @@ class ArticleShowView(View):
 class JudgementListView(View):
 
     def get(self, request):
+        if not request.user.is_authenticated or not request.user.is_staff:
+            return HttpResponseForbidden()
         articles = Article.objects.all().filter(status=Article.Status.REVIEW).order_by('-created')
         paginator = Paginator(articles, 10)
         page = request.GET.get('page', 1)
@@ -115,19 +140,35 @@ class JudgementRefereeView(View):
     form_class = ChoiceRefereeForm
 
     def get(self, request, id):
+        if not request.user.is_authenticated or not request.user.is_staff:
+            return HttpResponseForbidden()
         form = self.form_class()
         article = Article.objects.get(id=id)
         return render(request, 'account/referee.html', {'article': article, 'form': form})
+    
+    def post(self, request, id):
+        form = self.form_class(request.POST)
+        article = Article.objects.get(id=id)
+        if form.is_valid():
+            referee_id =int(form.cleaned_data["referee"])
+            Judgement.objects.create(referee_id=referee_id, article=article)
+            article.status = Article.Status.EVALUATION
+            article.save()
+        return redirect('account:judgement_list')
 
 
 # Show list of user articles
 class UserArticleListView(View):
     def get(self, request):
+        if not request.user.is_authenticated or not request.user.is_staff:
+            return HttpResponseForbidden()
         articles = Article.objects.filter(user=request.user)
         return render(request, 'account/user_article_list.html', {'articles': articles}) 
 
 # Add a ticket view
 def ticket_add(request):
+    if not request.user.is_authenticated:
+            return HttpResponseForbidden()
     if request.method == 'POST':
         form = TicketForm(request.POST)
         if form.is_valid():
@@ -145,6 +186,8 @@ def ticket_add(request):
 
 # User education profile edit view
 def education_edit(request):
+    if not request.user.is_authenticated:
+            return HttpResponseForbidden()
     if request.method == 'POST':
         form = EducationEditForm(instance=request.user.education, 
                                  data=request.POST)
@@ -159,6 +202,8 @@ def education_edit(request):
 
 # User profile edit view
 def profile_edit(request):
+    if not request.user.is_authenticated:
+            return HttpResponseForbidden()
     if request.method == 'POST':
         user_form = UserEditForm(instance=request.user, 
                                  data=request.POST)
@@ -220,6 +265,8 @@ def user_login(request):
 
 class DashboardView(View):
     def get(self, request):
+        if not request.user.is_authenticated:
+            return HttpResponseForbidden()
         return render(request, 'account/home.html')
 
 def home(request):

@@ -126,9 +126,27 @@
                         <a 
                         href="{% url 'account:user_articles' %}"
                         class="border-r pr-4 text-secondary hover:text-accent transition-all duration-300">
-                        رساله ها
+                        رساله من
                         </a>
                     </li>
+                    {% if request.user.is_staff %}
+                    <li>
+                        <a 
+                        href="{% url 'account:article_list' %}"
+                        class="border-r pr-4 text-secondary hover:text-accent transition-all duration-300">
+                        رساله های ارسال شده
+                        </a>
+                    </li>
+                    {% endif %}
+                    {% if request.user.is_staff %}
+                    <li>
+                        <a 
+                        href="{% url 'account:judgement_list' %}"
+                        class="border-r pr-4 text-secondary hover:text-accent transition-all duration-300">
+                        ارزیابی رساله ها
+                        </a>
+                    </li>
+                    {% endif %}
                     </ul>
             </div>
         </nav> 

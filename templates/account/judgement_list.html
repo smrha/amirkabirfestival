@@ -33,6 +33,15 @@
                                 گروه آموزشی
                             </th>
                             <th scope="col" class="px-2 py-3">
+                                رشته تحصیلی
+                            </th>
+                            <th scope="col" class="px-2 py-3">
+                                مقطع تحصیلی
+                            </th>
+                            <th scope="col" class="px-2 py-3">
+                                دانشگاه
+                            </th>
+                            <th scope="col" class="px-2 py-3">
                               استاد راهنما
                             </th>
                             <th scope="col" class="px-2 py-3">
@@ -62,6 +71,15 @@
                         </td>
                         <td class="px-2 py-4">
                           {{ article.education_group }}
+                        </td>
+                        <td class="px-2 py-4">
+                          {{ article.user.education.field_study }}
+                        </td>
+                        <td class="px-2 py-4">
+                          {{ article.user.education.degree }}
+                        </td>
+                        <td class="px-2 py-4">
+                          {{ article.user.education.university }}
                         </td>
                         <td class="px-2 py-4">
                           {{ article.teacher }}
