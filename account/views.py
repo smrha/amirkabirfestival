@@ -7,11 +7,11 @@ from django.contrib.auth import authenticate, login, logout
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from .forms import LoginForm, UserEditForm, ProfileEditForm, CustomAuthenticationForm, \
     CustomUserCreationForm, EducationEditForm, ArticleForm, TicketForm, UploadToReviewForm, \
-    ChoiceRefereeForm
+    ChoiceRefereeForm, ChoiceAssistantForm, REFEREES
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Profile, Education, Article, Judgement
 from django.contrib.auth.models import User
-import unicodecsv as csv
+import csv
 from io import BytesIO
 
 def export_to_excel(request):
@@ -115,7 +115,8 @@ class ArticleShowView(View):
                 article.status = Article.Status.REVIEW
                 article.save()         
         return redirect('account:article_list')
-    
+
+
 class JudgementAssistantListView(View):
 
     def get(self, request):
@@ -132,23 +133,56 @@ class JudgementAssistantListView(View):
         except EmptyPage:
             result = paginator.page(paginator.num_pages)
         
-        return render(request, 'account/assistant_list.html', {'articles': result }) 
+        return render(request, 'account/assistant_list.html', {'articles': result })
 
 
 class JudgementAssistantView(View):
-    form_class = ChoiceRefereeForm
+    form_class = ChoiceAssistantForm
 
-    def get(self, request, id):
+    def get(self, request, id):        
         if not request.user.is_authenticated or not request.user.is_staff:
             return HttpResponseForbidden()
-        form = self.form_class()
         article = Article.objects.get(id=id)
-        return render(request, 'account/assistant.html', {'article': article, 'form': form})
+        referees = User.objects.filter(is_staff=True).filter(profile__education_group=request.user.profile.education_group)
+        return render(request, 'account/assistant.html', {'article': article, 'referees': referees})
     
     def post(self, request, id):
-        return HttpResponseForbidden()
+        assists = request.POST.getlist('assistants')
+        article = Article.objects.get(id=id)
+        judgement = Judgement.objects.get(article=article)
+        for item in assists:
+            judgement.assistant.add(item)
+        article.status = Article.Status.ACCEPTED
+        article.save()   
+        return redirect('account:assistant_list')
     
 
+class JudgementJudgeListView(View):
+    def get(self, request):
+        if not request.user.is_authenticated or not request.user.is_staff:
+            return HttpResponseForbidden()
+        articles = Article.objects.filter(judgements__assistant=request.user).filter(status=Article.Status.ACCEPTED).order_by('-created')
+        paginator = Paginator(articles, 10)
+        page = request.GET.get('page', 1)
+    
+        try:
+            result = paginator.page(page)
+        except PageNotAnInteger:
+            result = paginator.page(1)
+        except EmptyPage:
+            result = paginator.page(paginator.num_pages)
+        
+        return render(request, 'account/judge_list.html', {'articles': result })
+
+
+class JudgementJudgeView(View):
+
+    def get(self, request, id):        
+        if not request.user.is_authenticated or not request.user.is_staff:
+            return HttpResponseForbidden()
+        article = Article.objects.get(id=id)
+        return render(request, 'account/judge.html', {'article': article})
+    
 
 class JudgementListView(View):
 

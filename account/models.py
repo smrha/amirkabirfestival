@@ -64,10 +64,23 @@ class Profile(models.Model):
         PARTICIPANT = 'شرکت کننده'
         CHIEF = 'سرداور'
         REFEREE = 'داور'
+
+    class EducationGroup(models.TextChoices):
+        ART = 'هنر و معماری'
+        HUMANITIES = 'علوم انسانی'
+        ENGINEERING = 'فنی و مهندسی'
+        SCIENCE = 'علوم پایه'
+        AGRICULTURAL = 'کشاورزی، منابع طبیعی و محیط زیست'
+        MEDICAL = 'علوم پزشکی'
+        VETERINARY = 'دامپزشکی و علوم دامی'
+
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     type = models.CharField(max_length=32,
                               choices=Type.choices,
                               default=Type.PARTICIPANT, verbose_name='نوع حساب کاربری')
+    education_group = models.CharField(max_length=32,
+                                       choices=EducationGroup.choices,
+                                       default=EducationGroup.ENGINEERING)
     father_name = models.CharField(max_length=120, verbose_name='نام پدر')
     national_id = models.CharField(max_length=10, verbose_name='کد ملی')
     mobile_number = models.CharField(max_length=11, verbose_name='موبایل')

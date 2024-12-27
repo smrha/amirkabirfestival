@@ -22,5 +22,7 @@ urlpatterns = [
     path('judgement/referee/<int:id>/', views.JudgementRefereeView.as_view(), name="judgement_referee"),
     path('assistant/list/', views.JudgementAssistantListView.as_view(), name="assistant_list"),
     path('judgement/assistant/<int:id>/', views.JudgementAssistantView.as_view(), name="judgement_assistant"),
+    path('judge/list/', views.JudgementJudgeListView.as_view(), name="judge_list"),
+    path('judge/<int:id>/', views.JudgementJudgeView.as_view(), name="judge"),
     path('export_to_excel/', views.export_to_excel, name='export')
 ]

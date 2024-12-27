@@ -30,7 +30,7 @@ TYPE_CHOICES = (
 )
 
 REFEREES =( 
-    ("1", "علی قنبری - فنی و مهندسی"),
+    ("291", "علی قنبری - فنی و مهندسی"),
     ("292", "نادر شکراللهی - علوم انسانی"),
     ("293", "احمد زنگانه - علوم انسانی"),
     ("294", "کامبیز پورطهماسی - کشاورزی…"),
@@ -55,7 +55,16 @@ class ChoiceRefereeForm(forms.Form):
         widget=forms.Select(
             choices=REFEREES,
             attrs={"class": "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"})
-    )    
+    )
+
+
+class ChoiceAssistantForm(forms.Form):
+    assistant = forms.MultipleChoiceField()
+    #     widget=forms.Select(
+    #         choices=REFEREES,
+    #         attrs={"class": "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"})
+    # ) 
+
 
 class TicketForm(forms.ModelForm):
     title = forms.CharField(
