@@ -129,7 +129,7 @@
                         رساله من
                         </a>
                     </li>
-                    {% if request.user.is_staff %}
+                    {% if request.user.is_superuser %}
                     <li>
                         <a 
                         href="{% url 'account:article_list' %}"
@@ -138,12 +138,21 @@
                         </a>
                     </li>
                     {% endif %}
-                    {% if request.user.is_staff %}
+                    {% if request.user.is_superuser %}
                     <li>
                         <a 
                         href="{% url 'account:judgement_list' %}"
                         class="border-r pr-4 text-secondary hover:text-accent transition-all duration-300">
                         ارزیابی رساله ها
+                        </a>
+                    </li>
+                    {% endif %}
+                    {% if request.user.profile.type == "سرداور" %}
+                    <li>
+                        <a 
+                        href="{% url 'account:assistant_list' %}"
+                        class="border-r pr-4 text-secondary hover:text-accent transition-all duration-300">
+                        کارتابل
                         </a>
                     </li>
                     {% endif %}

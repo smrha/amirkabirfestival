@@ -60,7 +60,14 @@ class Education(models.Model):
 
 
 class Profile(models.Model):
+    class Type(models.TextChoices):
+        PARTICIPANT = 'شرکت کننده'
+        CHIEF = 'سرداور'
+        REFEREE = 'داور'
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    type = models.CharField(max_length=32,
+                              choices=Type.choices,
+                              default=Type.PARTICIPANT, verbose_name='نوع حساب کاربری')
     father_name = models.CharField(max_length=120, verbose_name='نام پدر')
     national_id = models.CharField(max_length=10, verbose_name='کد ملی')
     mobile_number = models.CharField(max_length=11, verbose_name='موبایل')
@@ -100,8 +107,13 @@ class Ticket(models.Model):
     
 
 class Judgement(models.Model):
-    referee = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='داور')
-    article = models.ForeignKey(Article, on_delete=models.CASCADE, verbose_name='رساله')
+    referee = models.ForeignKey(User, on_delete=models.CASCADE, related_name='judgements', verbose_name='سر داور')
+    assistant = models.ManyToManyField(User, 
+                                       related_name='assistant_judgements', 
+                                       blank=True, 
+                                       null=True, 
+                                       verbose_name='داوران')
+    article = models.ForeignKey(Article, on_delete=models.CASCADE, related_name='judgements', verbose_name='رساله')
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
@@ -112,3 +124,48 @@ class Judgement(models.Model):
 
     def __str__(self):
         return f"{ self.article.id } - { self.referee.username }"
+    
+
+class Quiz(models.Model):
+    title = models.CharField(max_length=255, verbose_name='عنوان کاربرگ')
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        ordering = ['-created']
+        verbose_name = 'کاربرگ داوری'
+        verbose_name_plural = 'کاربرگ های'
+
+    def __str__(self):
+        return self.title
+
+
+class Question(models.Model):
+    title = models.CharField(max_length=255, verbose_name='سوال')
+    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['-created']
+        verbose_name = 'سوال'
+        verbose_name_plural = 'سوالات'
+
+    def __str__(self):
+        return self.title
+    
+
+class Response(models.Model):
+    question = models.ForeignKey(Question, on_delete=models.CASCADE, verbose_name='سوال')
+    article = models.ForeignKey(Article, on_delete=models.CASCADE, verbose_name='رساله')
+    value = models.PositiveSmallIntegerField(blank=True, null=True, verbose_name='پاسخ')
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['-created']
+        verbose_name = 'پاسخ'
+        verbose_name_plural = 'پاسخنامه'
+
+    def __str__(self):
+        return self.question.id

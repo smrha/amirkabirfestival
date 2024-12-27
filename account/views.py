@@ -116,13 +116,50 @@ class ArticleShowView(View):
                 article.save()         
         return redirect('account:article_list')
     
+class JudgementAssistantListView(View):
+
+    def get(self, request):
+        if not request.user.is_authenticated or not request.user.is_staff:
+            return HttpResponseForbidden()
+        articles = Article.objects.filter(judgements__referee=request.user).filter(status=Article.Status.EVALUATION).order_by('-created')
+        paginator = Paginator(articles, 10)
+        page = request.GET.get('page', 1)
+    
+        try:
+            result = paginator.page(page)
+        except PageNotAnInteger:
+            result = paginator.page(1)
+        except EmptyPage:
+            result = paginator.page(paginator.num_pages)
+        
+        return render(request, 'account/assistant_list.html', {'articles': result }) 
+
+
+class JudgementAssistantView(View):
+    form_class = ChoiceRefereeForm
+
+    def get(self, request, id):
+        if not request.user.is_authenticated or not request.user.is_staff:
+            return HttpResponseForbidden()
+        form = self.form_class()
+        article = Article.objects.get(id=id)
+        return render(request, 'account/assistant.html', {'article': article, 'form': form})
+    
+    def post(self, request, id):
+        return HttpResponseForbidden()
+    
+
 
 class JudgementListView(View):
 
     def get(self, request):
         if not request.user.is_authenticated or not request.user.is_staff:
             return HttpResponseForbidden()
-        articles = Article.objects.all().filter(status=Article.Status.REVIEW).order_by('-created')
+        if request.user.profile.type == Profile.Type.REFEREE:
+            # articles = Article.objects.all().filter(status=Article.Status.REVIEW).filter(judgements=request.user.judgements).order_by('-created')
+            articles =Article.objects.filter(judgements__referee=request.user).filter(status=Article.Status.REVIEW).order_by('-created')
+        else:
+            articles =Article.objects.filter(status=Article.Status.REVIEW).order_by('-created')
         paginator = Paginator(articles, 10)
         page = request.GET.get('page', 1)
     

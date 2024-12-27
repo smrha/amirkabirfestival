@@ -4442,16 +4442,16 @@ faq__item.open .faq__answer {
     padding-bottom: 0px;
   }
 
+  .xl\:pb-12 {
+    padding-bottom: 3rem;
+  }
+
   .xl\:ps-0 {
     padding-inline-start: 0px;
   }
 
   .xl\:pt-12 {
     padding-top: 3rem;
-  }
-
-  .xl\:pb-12 {
-    padding-bottom: 3rem;
   }
 
   .xl\:text-left {
