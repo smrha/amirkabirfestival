@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Profile, Education, Article, Ticket, Judgement
+from .models import Profile, Education, Article, Ticket, Judgement, Quiz
 
 @admin.register(Judgement)
 class JudgementAdmin(admin.ModelAdmin):
@@ -33,6 +33,16 @@ class EducationAdmin(admin.ModelAdmin):
     raw_id_fields = ['user']
 
 
-@admin.register(Ticket)
-class TicketAdmin(admin.ModelAdmin):
-    list_display = ['title', 'creator']
+# @admin.register(Question)
+# class QuestionAdmin(admin.ModelAdmin):
+#     pass
+
+
+@admin.register(Quiz)
+class QuizAdmin(admin.ModelAdmin):
+    pass
+
+
+# @admin.register(Response)
+# class ResponseAdmin(admin.ModelAdmin):
+#     pass

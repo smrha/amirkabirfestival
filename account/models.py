@@ -9,6 +9,7 @@ class Article(models.Model):
         REVIEW = 'REV'
         EVALUATION = 'EVA'
         ACCEPTED = 'ACC'
+        
     user =  models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_articles', verbose_name='کاربر')
     title = models.CharField(max_length=255, verbose_name='عنوان رساله')
     status = models.CharField(max_length=3,
@@ -140,45 +141,79 @@ class Judgement(models.Model):
     
 
 class Quiz(models.Model):
-    title = models.CharField(max_length=255, verbose_name='عنوان کاربرگ')
+    article = models.ForeignKey(Article, on_delete=models.CASCADE)
+    assistant = models.ForeignKey(User, on_delete=models.CASCADE)
+    quest_1 = models.PositiveIntegerField(blank=True, default=0)
+    quest_2 = models.PositiveIntegerField(blank=True, default=0)
+    quest_3 = models.PositiveIntegerField(blank=True, default=0)
+    quest_4 = models.PositiveIntegerField(blank=True, default=0)
+    quest_5 = models.PositiveIntegerField(blank=True, default=0)
+    quest_6 = models.PositiveIntegerField(blank=True, default=0)
+    quest_7 = models.PositiveIntegerField(blank=True, default=0)
+    quest_8 = models.PositiveIntegerField(blank=True, default=0)
+    quest_9 = models.PositiveIntegerField(blank=True, default=0)
+    quest_10 = models.PositiveIntegerField(blank=True, default=0)
+    quest_11 = models.PositiveIntegerField(blank=True, default=0)
+    quest_12 = models.PositiveIntegerField(blank=True, default=0)
+    quest_13 = models.PositiveIntegerField(blank=True, default=0)
+    quest_14 = models.PositiveIntegerField(blank=True, default=0)
+    quest_15 = models.PositiveIntegerField(blank=True, default=0)
+    quest_16 = models.PositiveIntegerField(blank=True, default=0)
+    quest_17 = models.PositiveIntegerField(blank=True, default=0)
+    quest_18 = models.PositiveIntegerField(blank=True, default=0)
+    quest_19 = models.PositiveIntegerField(blank=True, default=0)
+    quest_20 = models.PositiveIntegerField(blank=True, default=0)
+    quest_21 = models.PositiveIntegerField(blank=True, default=0)
+    quest_22 = models.PositiveIntegerField(blank=True, default=0)
+    quest_23 = models.PositiveIntegerField(blank=True, default=0)
+    quest_24 = models.PositiveIntegerField(blank=True, default=0)
+    quest_25 = models.PositiveIntegerField(blank=True, default=0)
+    quest_26 = models.PositiveIntegerField(blank=True, default=0)
+    quest_27 = models.PositiveIntegerField(blank=True, default=0)
+    quest_28 = models.PositiveIntegerField(blank=True, default=0)
+    quest_29 = models.PositiveIntegerField(blank=True, default=0)
+    quest_30 = models.PositiveIntegerField(blank=True, default=0)
+    quest_31 = models.PositiveIntegerField(blank=True, default=0)
+    quest_32 = models.PositiveIntegerField(blank=True, default=0)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     
     class Meta:
         ordering = ['-created']
-        verbose_name = 'کاربرگ داوری'
-        verbose_name_plural = 'کاربرگ های'
+        verbose_name = 'پرسشنامه'
+        verbose_name_plural = 'پرسشنامه ها'
 
     def __str__(self):
-        return self.title
+        return f"{self.article.title}-{self.assistant.first_name} {self.assistant.last_name}"
 
 
-class Question(models.Model):
-    title = models.CharField(max_length=255, verbose_name='سوال')
-    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
-    created = models.DateTimeField(auto_now_add=True)
-    updated = models.DateTimeField(auto_now=True)
+# class Question(models.Model):
+#     title = models.CharField(max_length=255, verbose_name='سوال')
+#     quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
+#     created = models.DateTimeField(auto_now_add=True)
+#     updated = models.DateTimeField(auto_now=True)
 
-    class Meta:
-        ordering = ['-created']
-        verbose_name = 'سوال'
-        verbose_name_plural = 'سوالات'
+#     class Meta:
+#         ordering = ['-created']
+#         verbose_name = 'سوال'
+#         verbose_name_plural = 'سوالات'
 
-    def __str__(self):
-        return self.title
+#     def __str__(self):
+#         return self.title
     
 
-class Response(models.Model):
-    question = models.ForeignKey(Question, on_delete=models.CASCADE, verbose_name='سوال')
-    article = models.ForeignKey(Article, on_delete=models.CASCADE, verbose_name='رساله')
-    value = models.PositiveSmallIntegerField(blank=True, null=True, verbose_name='پاسخ')
-    created = models.DateTimeField(auto_now_add=True)
-    updated = models.DateTimeField(auto_now=True)
+# class Response(models.Model):
+#     assistant = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
+#     question = models.ForeignKey(Question, on_delete=models.CASCADE, verbose_name='سوال')
+#     article = models.ForeignKey(Article, on_delete=models.CASCADE, verbose_name='رساله')
+#     value = models.PositiveSmallIntegerField(blank=True, null=True, verbose_name='پاسخ')
+#     created = models.DateTimeField(auto_now_add=True)
+#     updated = models.DateTimeField(auto_now=True)
 
-    class Meta:
-        ordering = ['-created']
-        verbose_name = 'پاسخ'
-        verbose_name_plural = 'پاسخنامه'
+#     class Meta:
+#         ordering = ['-created']
+#         verbose_name = 'پاسخ'
+#         verbose_name_plural = 'پاسخنامه'
 
-    def __str__(self):
-        return self.question.id
+#     def __str__(self):
+#         return self.question.id

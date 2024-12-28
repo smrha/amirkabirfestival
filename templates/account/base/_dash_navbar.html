@@ -155,6 +155,13 @@
                         کارتابل
                         </a>
                     </li>
+                    <li>
+                        <a 
+                        href="{% url 'account:judge_list' %}"
+                        class="border-r pr-4 text-secondary hover:text-accent transition-all duration-300">
+                        کارتابل داوری
+                        </a>
+                    </li>
                     {% endif %}
                     {% if request.user.profile.type == "داور" %}
                     <li>

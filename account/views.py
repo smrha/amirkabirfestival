@@ -7,9 +7,9 @@ from django.contrib.auth import authenticate, login, logout
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from .forms import LoginForm, UserEditForm, ProfileEditForm, CustomAuthenticationForm, \
     CustomUserCreationForm, EducationEditForm, ArticleForm, TicketForm, UploadToReviewForm, \
-    ChoiceRefereeForm, ChoiceAssistantForm, REFEREES
+    ChoiceRefereeForm, ChoiceAssistantForm, REFEREES, QuizFirstForm, QuizSecondForm
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import Profile, Education, Article, Judgement
+from .models import Profile, Education, Article, Judgement, Quiz
 from django.contrib.auth.models import User
 import csv
 from io import BytesIO
@@ -26,6 +26,33 @@ def export_to_excel(request):
         writer.writerow(article)
     return responese
 
+
+class ArbitrationShowView(View):
+    
+    def get(self, request, id):
+        article = Article.objects.get(id=id)
+        if Quiz.objects.filter(article=article).filter(assistant=request.user).exists():
+            return redirect('account:judge_list')
+        if request.user.profile.education_group == Profile.EducationGroup.HUMANITIES:
+            form = QuizSecondForm()
+        else:
+            form = QuizFirstForm()
+        return render(request, 'account/arbitration.html', {'form': form})
+    
+    def post(self, request, id):
+        article = Article.objects.get(id=id)
+        if request.user.profile.education_group == Profile.EducationGroup.HUMANITIES:
+            form = QuizSecondForm(request.POST)
+        else:
+            form = QuizFirstForm(request.POST)
+
+        if form.is_valid:
+            new_quiz = form.save(commit=False)
+            new_quiz.article = article
+            new_quiz.assistant = request.user
+            new_quiz.save()
+            return redirect('account:judge_list')
+        return render(request, 'account/arbitration.html', {'form': form})
 
 class CustomLoginView(LoginView):
     authentication_form = CustomAuthenticationForm
@@ -181,7 +208,9 @@ class JudgementJudgeView(View):
         if not request.user.is_authenticated or not request.user.is_staff:
             return HttpResponseForbidden()
         article = Article.objects.get(id=id)
-        return render(request, 'account/judge.html', {'article': article})
+        flag = Quiz.objects.filter(article=article).filter(assistant=request.user).exists()
+        judge = request.user.assistant_judgements.get(article__id=id)
+        return render(request, 'account/judge.html', {'article': article, 'judge': judge, 'flag':flag})
     
 
 class JudgementListView(View):
@@ -339,6 +368,7 @@ class DashboardView(View):
         if not request.user.is_authenticated:
             return HttpResponseForbidden()
         return render(request, 'account/home.html')
+        
 
 def home(request):
     return render(request, 'account/home.html')
