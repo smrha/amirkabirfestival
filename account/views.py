@@ -13,6 +13,7 @@ from .models import Profile, Education, Article, Judgement, Quiz
 from django.contrib.auth.models import User
 import csv
 from io import BytesIO
+from extentions.utils import send_sms
 
 def export_to_excel(request):
     articles = Article.objects.all()
@@ -179,6 +180,10 @@ class JudgementAssistantView(View):
         judgement = Judgement.objects.get(article=article)
         for item in assists:
             judgement.assistant.add(item)
+            message = f"داور گرامی: رساله {article.title} جهت ارزیابی به کارتابل شما ارجاع شد. دبیرخانه جشنواره امیرکبیر"
+            to = User.objects.get(id=item)
+            mobile = to.username
+            send_sms(message, mobile)
         article.status = Article.Status.ACCEPTED
         article.save()   
         return redirect('account:assistant_list')
