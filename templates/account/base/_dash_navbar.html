@@ -162,6 +162,13 @@
                         کارتابل داوری
                         </a>
                     </li>
+                    <li>
+                        <a 
+                        href="{% url 'account:judgement_status' %}"
+                        class="border-r pr-4 text-secondary hover:text-accent transition-all duration-300">
+                        گزارش داوری
+                        </a>
+                    </li>
                     {% endif %}
                     {% if request.user.profile.type == "داور" %}
                     <li>
@@ -171,6 +178,7 @@
                         کارتابل
                         </a>
                     </li>
+                    
                     {% endif %}
                     </ul>
             </div>

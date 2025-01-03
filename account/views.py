@@ -27,6 +27,22 @@ def export_to_excel(request):
         writer.writerow(article)
     return responese
 
+class ArticleListJudgementStatus(View):
+    def get(self, request):
+        if not request.user.is_authenticated or not request.user.is_staff:
+            return HttpResponseForbidden()
+        judgements = Judgement.objects.filter(referee=request.user)
+        paginator = Paginator(judgements, 10)
+        page = request.GET.get('page', 1)
+    
+        try:
+            result = paginator.page(page)
+        except PageNotAnInteger:
+            result = paginator.page(1)
+        except EmptyPage:
+            result = paginator.page(paginator.num_pages)
+            
+        return render(request, 'account/article_judgement_status.html', {'judgements': result})
 
 class ArbitrationShowView(View):
     
@@ -109,7 +125,7 @@ class ArticleListView(View):
     def get(self, request):
         if not request.user.is_authenticated or not request.user.is_staff:
             return HttpResponseForbidden()
-        articles = Article.objects.all().filter(status=Article.Status.UPLOADED).order_by('-created')
+        articles = Article.objects.all().order_by('-created')
         paginator = Paginator(articles, 10)
         page = request.GET.get('page', 1)
     

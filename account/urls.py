@@ -19,6 +19,7 @@ urlpatterns = [
     path('ticket/add/', views.ticket_add, name='ticket_add'),
 
     path('judgement/list/', views.JudgementListView.as_view(), name="judgement_list"),
+    path('judgement/status', views.ArticleListJudgementStatus.as_view(), name="judgement_status"),
     path('judgement/referee/<int:id>/', views.JudgementRefereeView.as_view(), name="judgement_referee"),
     path('assistant/list/', views.JudgementAssistantListView.as_view(), name="assistant_list"),
     path('judgement/assistant/<int:id>/', views.JudgementAssistantView.as_view(), name="judgement_assistant"),
