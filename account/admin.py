@@ -40,7 +40,7 @@ class EducationAdmin(admin.ModelAdmin):
 
 @admin.register(Quiz)
 class QuizAdmin(admin.ModelAdmin):
-    pass
+    list_display = ['article__title', 'assistant__first_name', 'assistant__last_name', 'result']
 
 
 # @admin.register(Response)

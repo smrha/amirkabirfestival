@@ -90,14 +90,12 @@ class NewsListView(View):
 def news(request):
     return render(request, 'blog/post/news_list.html')
 
-def post_detail(request, year, month, day, post):
+def post_detail(request, id, post):
     posts = Post.published.all()[:5]
     post = get_object_or_404(Post,
                              status=Post.Status.PUBLISHED,
                              slug=post,
-                             publish__year=year,
-                             publish__month=month,
-                             publish__day=day)
+                             id=id)
     post.views += 1
     post.save()
     return render(request,

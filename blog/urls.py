@@ -24,7 +24,7 @@ urlpatterns = [
     path('purpose/', views.PurposeView.as_view(), name='purpose'),
     path('executive/', views.executive, name='executive'),
     path('news/', views.NewsListView.as_view(), name='news_list'),
-    path('<int:year>/<int:month>/<int:day>/<slug:post>/',
+    path('<int:id>/<slug:post>/',
          views.post_detail,
          name='post_detail'),
     # path('<int:post_id>/share/',

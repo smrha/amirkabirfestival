@@ -185,6 +185,10 @@ class Quiz(models.Model):
 
     def __str__(self):
         return f"{self.article.title}-{self.assistant.first_name} {self.assistant.last_name}"
+    
+    def result(self):
+        result = self.quest_1 +  self.quest_2 +  self.quest_3 +  self.quest_4 + self.quest_5 + self.quest_6 +  self.quest_7 +  self.quest_8 +  self.quest_9 + self.quest_10 + self.quest_11 +  self.quest_12 +  self.quest_13 +  self.quest_14 + self.quest_15 + self.quest_16 +  self.quest_17 +  self.quest_18 +  self.quest_19 + self.quest_20 + self.quest_21 +  self.quest_22 +  self.quest_23 +  self.quest_24 + self.quest_25 + self.quest_26 +  self.quest_27 +  self.quest_28 +  self.quest_29 + self.quest_30 + self.quest_31 + self.quest_32      
+        return result
 
 
 # class Question(models.Model):
